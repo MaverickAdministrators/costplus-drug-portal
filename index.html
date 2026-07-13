@@ -28,7 +28,7 @@
   }
   *,*::before,*::after{box-sizing:border-box;}
   html{scroll-behavior:smooth;}
-  body{margin:0;font-family:var(--font-ui);color:var(--text);background:var(--bg);-webkit-font-smoothing:antialiased;line-height:1.5;}
+  body{margin:0;font-family:var(--font-ui);color:var(--text);background:var(--bg);-webkit-font-smoothing:antialiased;line-height:1.5;display:flex;flex-direction:column;min-height:100vh;min-height:100svh;}
   h1,h2,h3{font-family:var(--font-display);margin:0;}
   ::selection{background:rgba(217,168,103,.35);}
   :focus-visible{outline:2px solid var(--gold);outline-offset:2px;border-radius:var(--radius-sm);}
@@ -46,7 +46,7 @@
   .powered .dot{width:6px;height:6px;border-radius:50%;background:var(--gold-bright);}
 
   /* ===== Hero ===== */
-  .hero{position:relative;overflow:hidden;background:linear-gradient(165deg,var(--ink) 0%, var(--ink-2) 55%, var(--ink-3) 100%);color:#fff;padding:150px 0 170px;}
+  .hero{position:relative;overflow:hidden;background:linear-gradient(165deg,var(--ink) 0%, var(--ink-2) 55%, var(--ink-3) 100%);color:#fff;padding:140px 0 160px;min-height:100vh;min-height:100svh;display:flex;flex-direction:column;justify-content:center;}
   .hero::before{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.035) 1px,transparent 1px);background-size:44px 44px;mask-image:linear-gradient(180deg,rgba(0,0,0,.8),transparent 85%);-webkit-mask-image:linear-gradient(180deg,rgba(0,0,0,.8),transparent 85%);pointer-events:none;}
   .hero-tri{position:absolute;right:2%;top:8%;width:640px;height:580px;opacity:.9;pointer-events:none;}
   .blob{position:absolute;border-radius:50%;filter:blur(80px);pointer-events:none;}
@@ -68,7 +68,7 @@
   @media (max-width:980px){.grid{grid-template-columns:1fr;}}
 
   .eyebrow{display:inline-flex;align-items:center;gap:10px;font-family:var(--font-mono);font-size:12px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--gold-bright);background:rgba(217,168,103,.10);border:1px solid rgba(217,168,103,.35);border-radius:999px;padding:9px 18px;margin:0 0 26px;}
-  .eyebrow .tri{width:0;height:0;border-left:5px solid transparent;border-right:5px solid transparent;border-bottom:8px solid var(--gold-bright);}
+  .eyebrow .mark{width:13px;height:11px;flex-shrink:0;}
 
   .hero h1{font-weight:700;font-size:clamp(40px,6vw,68px);line-height:1.03;letter-spacing:-.02em;margin-bottom:20px;}
   /* Fraunces italic — the one serif moment, shared with the portal numerals */
@@ -116,7 +116,7 @@
 
   .badge-pop{display:none;align-items:center;gap:8px;font-size:13px;font-weight:600;color:#fff;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.2);border-radius:999px;padding:6px 14px;margin-bottom:14px;width:fit-content;}
   .badge-pop.show{display:inline-flex;animation:pop 320ms cubic-bezier(.34,1.56,.64,1);}
-  .badge-pop .tri{width:0;height:0;border-left:4px solid transparent;border-right:4px solid transparent;border-bottom:7px solid var(--tri-color, currentColor);}
+  .badge-pop .mark{width:10px;height:8.5px;color:var(--tri-color, currentColor);flex-shrink:0;}
   @keyframes pop{from{transform:scale(.8);opacity:0;}to{transform:scale(1);opacity:1;}}
 
   .no-match{display:none;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.14);border-radius:var(--radius-md);padding:16px 18px;margin-bottom:14px;font-size:13.5px;color:#c3cddd;line-height:1.6;}
@@ -126,11 +126,61 @@
   .no-match button{background:rgba(217,168,103,.14);border:1px solid rgba(217,168,103,.4);color:var(--gold-bright);font-size:12.5px;font-weight:600;border-radius:999px;padding:5px 12px;cursor:pointer;font-family:var(--font-ui);}
   .no-match button:hover{background:rgba(217,168,103,.22);}
 
-  /* ===== Footer ===== */
-  footer{background:var(--panel);border-top:1px solid var(--line);}
-  .footer-inner{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;padding:28px 0;font-size:13px;color:var(--muted);}
-  footer a{color:var(--navy);text-decoration:none;font-weight:600;}
-  footer strong{color:var(--text);}
+  /* ===== Benefit belt — the light interlude between the two dark bookends ===== */
+  .belt{background:linear-gradient(180deg,#ffffff 0%,#F2F5FA 100%);padding:92px 0 100px;}
+  .belt-head{display:flex;align-items:center;gap:22px;margin:0 0 58px;}
+  .belt-head::before,.belt-head::after{content:"";height:1px;flex:1;background:var(--line);}
+  .belt-head span{font-family:var(--font-mono);font-size:11.5px;font-weight:600;letter-spacing:.24em;text-transform:uppercase;color:var(--muted);white-space:nowrap;}
+  .belt-grid{display:grid;grid-template-columns:repeat(3,1fr);}
+  .belt-item{padding:6px 44px 0;border-left:1px solid var(--line);}
+  .belt-item:first-child{padding-left:0;border-left:0;}
+  .belt-item:last-child{padding-right:0;}
+  .belt-num{display:flex;align-items:center;gap:12px;font-family:var(--font-mono);font-size:12px;font-weight:600;letter-spacing:.16em;color:var(--faint);margin:0 0 18px;}
+  .belt-num::after{content:"";width:36px;height:1px;background:color-mix(in srgb, var(--faint) 50%, transparent);}
+  .belt-item.reward .belt-num{color:var(--gold-deep);}
+  .belt-item.reward .belt-num::after{background:rgba(184,135,79,.5);}
+  .belt-item h3{font-size:21px;letter-spacing:-.01em;margin-bottom:10px;}
+  .belt-item p{margin:0;font-size:14.5px;line-height:1.7;color:var(--muted);}
+  .belt-item.reward p strong{color:var(--gold-deep);font-weight:600;}
+  .belt-link{display:inline-flex;align-items:center;gap:6px;margin-top:14px;font-size:13.5px;font-weight:600;color:var(--accent-deep);text-decoration:none;border-bottom:1px solid color-mix(in srgb,var(--accent) 40%,transparent);padding-bottom:2px;transition:color 150ms ease,border-color 150ms ease;}
+  .belt-link:hover{color:var(--navy);border-color:var(--navy);}
+  .belt-link svg{width:12px;height:12px;stroke:currentColor;fill:none;stroke-width:2.4;flex-shrink:0;}
+  @media (max-width:880px){
+    .belt{padding:64px 0 72px;}
+    .belt-grid{grid-template-columns:1fr;}
+    .belt-item{border-left:0;border-top:1px solid var(--line);padding:28px 0 0;margin-top:28px;}
+    .belt-item:first-child{border-top:0;padding-top:0;margin-top:0;}
+  }
+
+  /* ===== Footer — dark brand anchor, mirrors the hero's texture ===== */
+  .site-foot{position:relative;overflow:hidden;margin-top:auto;background:linear-gradient(180deg,var(--ink-2) 0%,var(--ink) 100%);color:#aab6c9;}
+  .site-foot::before{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.03) 1px,transparent 1px);background-size:44px 44px;mask-image:linear-gradient(0deg,rgba(0,0,0,.75),transparent 80%);-webkit-mask-image:linear-gradient(0deg,rgba(0,0,0,.75),transparent 80%);pointer-events:none;}
+  .foot-glow{position:absolute;top:-180px;right:-120px;width:520px;height:520px;border-radius:50%;filter:blur(90px);background:radial-gradient(circle,rgba(72,125,169,.20) 0%,transparent 65%);pointer-events:none;}
+  .foot-top{position:relative;display:flex;align-items:flex-start;justify-content:space-between;gap:56px;padding:66px 0 46px;}
+  .foot-brand{max-width:560px;}
+  .foot-desc{margin:24px 0 0;font-size:14.5px;line-height:1.75;color:#aab6c9;}
+  .foot-desc strong{color:#e7ecf5;font-weight:600;}
+  .foot-contact{text-align:right;flex-shrink:0;}
+  .foot-lbl{display:block;font-family:var(--font-mono);font-size:11.5px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:#7c88a0;}
+  .foot-mail{display:inline-block;margin:12px 0 8px;font-family:var(--font-display);font-size:21px;font-weight:600;letter-spacing:-.01em;color:var(--gold-bright);text-decoration:none;border-bottom:1px solid rgba(232,196,140,.35);padding-bottom:3px;transition:color 150ms ease,border-color 150ms ease;}
+  .foot-mail:hover{color:#f6e3c4;border-color:#f6e3c4;}
+  .foot-hint{display:block;font-size:13px;color:#7c88a0;}
+  .foot-rule{position:relative;height:1px;background:rgba(255,255,255,.09);}
+  .foot-meta{position:relative;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px 24px;padding:24px 0 32px;font-size:12.5px;color:#7c88a0;}
+  .foot-tag{display:inline-flex;align-items:center;gap:9px;font-family:var(--font-mono);font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;}
+  .foot-tag .mark{width:11px;height:9.5px;color:var(--accent);flex-shrink:0;}
+  @media (max-width:760px){
+    .foot-top{flex-direction:column;gap:36px;padding:52px 0 40px;}
+    .foot-contact{text-align:left;}
+    .foot-meta{flex-direction:column;align-items:flex-start;}
+  }
+
+  /* ===== Scroll reveal (belt & footer) ===== */
+  @media (prefers-reduced-motion:no-preference){
+    .fu{opacity:0;transform:translateY(20px);}
+    .fu.in{animation:fu 560ms cubic-bezier(.16,1,.3,1) forwards;}
+    @keyframes fu{to{opacity:1;transform:translateY(0);}}
+  }
 
   /* ===== Transition wipe ===== */
   .wipe{position:fixed;inset:0;z-index:200;pointer-events:none;display:flex;align-items:center;justify-content:center;opacity:0;}
@@ -154,6 +204,10 @@
 </style>
 </head>
 <body>
+<!-- Maverick mark — the nested triangle from the logo's A, used wherever an eyebrow label needs its glyph -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+  <symbol id="mvk-mark" viewBox="0 0 14 12"><path d="M7 1.1L13 11.1H1z" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/><path d="M7 5.3L10 10.2H4z" fill="currentColor"/></symbol>
+</defs></svg>
 <a href="#lookup" class="skip-link">Skip to employer lookup</a>
 
 <section class="hero">
@@ -174,7 +228,7 @@
   <div class="shell hero-inner">
     <div class="grid">
       <div>
-        <p class="eyebrow reveal"><span class="tri" aria-hidden="true"></span>Prescription Savings Program</p>
+        <p class="eyebrow reveal"><svg class="mark" aria-hidden="true"><use href="#mvk-mark"/></svg>Prescription Savings Program</p>
         <h1 class="reveal r2">Save on your<br><span class="accent">prescriptions.</span><br>Get rewarded.</h1>
         <p class="hero-sub reveal r3">Your employer offers a prescription savings benefit through Mark Cuban&rsquo;s Cost Plus Drugs — where generic medications cost a fraction of retail price. Fill your prescription, submit your receipt, and get paid back.</p>
         <div class="trust reveal r4">
@@ -188,7 +242,7 @@
         <h2>Access your member portal</h2>
         <p class="sub">Enter your employer&rsquo;s name to get started</p>
 
-        <div class="badge-pop" id="matchBadge" role="status"><span class="tri" aria-hidden="true"></span><span id="matchLabel"></span></div>
+        <div class="badge-pop" id="matchBadge" role="status"><svg class="mark" aria-hidden="true"><use href="#mvk-mark"/></svg><span id="matchLabel"></span></div>
         <div class="no-match" id="noMatch" role="status">
           We couldn&rsquo;t find &ldquo;<strong id="noMatchTerm"></strong>.&rdquo; Try one of these:
           <div class="sugg">
@@ -215,10 +269,49 @@
   </div>
 </section>
 
-<footer>
-  <div class="shell footer-inner">
-    <span>Cost Plus Drugs Member Program, administered by <strong>Maverick Administrators</strong>.</span>
-    <span>Questions? Email <a href="mailto:support@mavericktpa.com">support@mavericktpa.com</a></span>
+<section class="belt" aria-label="Your benefit at a glance">
+  <div class="shell">
+    <p class="belt-head fu"><span>Your benefit at a glance</span></p>
+    <div class="belt-grid">
+      <article class="belt-item fu">
+        <p class="belt-num">01</p>
+        <h3>Fill your prescription</h3>
+        <p>Order through Mark Cuban&rsquo;s Cost Plus Drugs, where generic medications cost a fraction of retail price.</p>
+        <a class="belt-link" href="https://costplusdrugs.com" target="_blank" rel="noopener">See real prices at costplusdrugs.com <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg></a>
+      </article>
+      <article class="belt-item fu">
+        <p class="belt-num">02</p>
+        <h3>Submit your receipt</h3>
+        <p>Upload your Cost Plus order confirmation through Maverick&rsquo;s secure claim form &mdash; no paper forms, no mailing anything.</p>
+      </article>
+      <article class="belt-item reward fu">
+        <p class="belt-num">03</p>
+        <h3>Get paid back</h3>
+        <p>100% of your prescription and shipping cost reimbursed, plus a 10% savings reward &mdash; <strong>up to $50 per fill</strong>.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<footer class="site-foot">
+  <span class="foot-glow" aria-hidden="true"></span>
+  <div class="shell">
+    <div class="foot-top">
+      <div class="foot-brand fu">
+        <span class="brand-plate"><img src="maverick-logo.png" alt="Maverick Administrators" /></span>
+        <p class="foot-desc">The <strong>Cost Plus Drugs Member Program</strong> is a prescription savings benefit administered by <strong>Maverick Administrators</strong> &mdash; fill your prescription at Cost Plus prices, submit your receipt, and get paid back.</p>
+      </div>
+      <div class="foot-contact fu">
+        <span class="foot-lbl">Questions about your benefit?</span>
+        <a class="foot-mail" href="mailto:support@mavericktpa.com">support@mavericktpa.com</a>
+        <span class="foot-hint">or contact your HR department</span>
+      </div>
+    </div>
+    <div class="foot-rule"></div>
+    <div class="foot-meta">
+      <span>&copy; <span id="yr">2026</span> Maverick Administrators. All rights reserved.</span>
+      <span class="foot-tag"><svg class="mark" aria-hidden="true"><use href="#mvk-mark"/></svg>Cost Plus Drugs Member Program &middot; Member Portal</span>
+    </div>
   </div>
 </footer>
 
@@ -300,6 +393,28 @@
     wipe.classList.add('active');
     setTimeout(function(){ window.location.href = slug + '.html'; }, 560);
   }
+
+  // Reveal-on-scroll for the belt + footer
+  (function(){
+    var els = document.querySelectorAll('.fu');
+    if(!els.length) return;
+    if(window.matchMedia('(prefers-reduced-motion: reduce)').matches || !('IntersectionObserver' in window)){
+      els.forEach(function(el){ el.classList.add('in'); });
+      return;
+    }
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(en, i){
+        if(en.isIntersecting){
+          en.target.style.animationDelay = (i % 4) * 90 + 'ms';
+          en.target.classList.add('in');
+          io.unobserve(en.target);
+        }
+      });
+    }, { threshold: .15 });
+    els.forEach(function(el){ io.observe(el); });
+  })();
+
+  document.getElementById('yr').textContent = new Date().getFullYear();
 </script>
 </body>
 </html>
