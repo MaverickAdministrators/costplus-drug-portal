@@ -1,0 +1,305 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>Cost Plus Drugs Member Program | Maverick Administrators</title>
+<meta name="description" content="Save on prescriptions and get rewarded. A Maverick Administrators benefit powered by Cost Plus Drugs." />
+<link rel="icon" href="maverick-logo.png" type="image/png" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&family=Fraunces:ital,opsz,wght@0,9..144,700;1,9..144,600&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --ink:#0B1322; --ink-2:#0F1B30; --ink-3:#16243D;
+    --bg:#E9EDF2; --panel:#ffffff;
+    --text:#0A121F; --muted:#50617B; --faint:#8D99AD; --line:#DDE3EE;
+    --navy:#001F43;
+    --gold:#D9A867; --gold-bright:#E8C48C; --gold-deep:#B8874F;
+    --accent:#487DA9; --accent-deep:#2E5A83;
+    --green:#22C55E;
+    --radius-lg:20px; --radius-md:12px; --radius-sm:8px;
+    --shadow-sm:0 1px 2px rgba(10,19,34,.06), 0 2px 10px rgba(10,19,34,.06);
+    --shadow-md:0 8px 24px rgba(10,19,34,.14), 0 22px 50px rgba(10,19,34,.12);
+    --shadow-lg:0 14px 40px rgba(0,0,0,.35);
+    --font-display:'Space Grotesk', system-ui, sans-serif;
+    --font-ui:'Inter', system-ui, sans-serif;
+    --font-mono:'JetBrains Mono', ui-monospace, monospace;
+  }
+  *,*::before,*::after{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{margin:0;font-family:var(--font-ui);color:var(--text);background:var(--bg);-webkit-font-smoothing:antialiased;line-height:1.5;}
+  h1,h2,h3{font-family:var(--font-display);margin:0;}
+  ::selection{background:rgba(217,168,103,.35);}
+  :focus-visible{outline:2px solid var(--gold);outline-offset:2px;border-radius:var(--radius-sm);}
+  .skip-link{position:absolute;left:-9999px;top:8px;background:var(--ink);color:#fff;padding:10px 14px;border-radius:var(--radius-sm);font-weight:600;z-index:100;}
+  .skip-link:focus{left:16px;}
+
+  .shell{max-width:1240px;margin:0 auto;padding-left:32px;padding-right:32px;}
+
+  /* ===== Top bar ===== */
+  .topbar{position:absolute;top:0;left:0;right:0;z-index:10;padding-top:28px;}
+  .topbar-inner{display:flex;align-items:center;justify-content:space-between;}
+  .brand-plate{display:inline-flex;align-items:center;background:linear-gradient(180deg,#fefdfb,#f4efe5);border:1px solid rgba(217,168,103,.55);border-radius:12px;padding:9px 18px;box-shadow:0 1px 0 rgba(255,255,255,.9) inset,0 4px 14px rgba(0,0,0,.4);}
+  .brand-plate img{height:28px;width:auto;display:block;}
+  .powered{display:inline-flex;align-items:center;gap:8px;font-family:var(--font-mono);font-size:11.5px;font-weight:600;letter-spacing:.06em;color:#c3cddd;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.14);border-radius:999px;padding:8px 16px;}
+  .powered .dot{width:6px;height:6px;border-radius:50%;background:var(--gold-bright);}
+
+  /* ===== Hero ===== */
+  .hero{position:relative;overflow:hidden;background:linear-gradient(165deg,var(--ink) 0%, var(--ink-2) 55%, var(--ink-3) 100%);color:#fff;padding:150px 0 170px;}
+  .hero::before{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.035) 1px,transparent 1px);background-size:44px 44px;mask-image:linear-gradient(180deg,rgba(0,0,0,.8),transparent 85%);-webkit-mask-image:linear-gradient(180deg,rgba(0,0,0,.8),transparent 85%);pointer-events:none;}
+  .hero-tri{position:absolute;right:2%;top:8%;width:640px;height:580px;opacity:.9;pointer-events:none;}
+  .blob{position:absolute;border-radius:50%;filter:blur(80px);pointer-events:none;}
+  .blob-gold{width:520px;height:520px;top:-220px;left:-100px;background:radial-gradient(circle,rgba(217,168,103,.30) 0%,transparent 65%);}
+  .blob-blue{width:600px;height:600px;bottom:-260px;right:-140px;background:radial-gradient(circle,rgba(72,125,169,.26) 0%,transparent 65%);}
+  @media (prefers-reduced-motion:no-preference){
+    .blob-gold{animation:drift-a 17s ease-in-out infinite alternate;}
+    .blob-blue{animation:drift-b 21s ease-in-out infinite alternate;}
+    @keyframes drift-a{from{transform:translate(0,0) scale(1);}to{transform:translate(120px,60px) scale(1.12);}}
+    @keyframes drift-b{from{transform:translate(0,0) scale(1.05);}to{transform:translate(-110px,40px) scale(.95);}}
+    .hero-tri{animation:tri-drift 24s ease-in-out infinite alternate;}
+    @keyframes tri-drift{from{transform:translateY(0);}to{transform:translateY(-22px);}}
+  }
+  .hero-wave{position:absolute;bottom:-1px;left:0;right:0;line-height:0;z-index:2;pointer-events:none;}
+  .hero-wave svg{width:100%;height:96px;display:block;}
+
+  .hero-inner{position:relative;z-index:1;}
+  .grid{display:grid;grid-template-columns:1.05fr .95fr;gap:64px;align-items:center;}
+  @media (max-width:980px){.grid{grid-template-columns:1fr;}}
+
+  .eyebrow{display:inline-flex;align-items:center;gap:10px;font-family:var(--font-mono);font-size:12px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--gold-bright);background:rgba(217,168,103,.10);border:1px solid rgba(217,168,103,.35);border-radius:999px;padding:9px 18px;margin:0 0 26px;}
+  .eyebrow .tri{width:0;height:0;border-left:5px solid transparent;border-right:5px solid transparent;border-bottom:8px solid var(--gold-bright);}
+
+  .hero h1{font-weight:700;font-size:clamp(40px,6vw,68px);line-height:1.03;letter-spacing:-.02em;margin-bottom:20px;}
+  /* Fraunces italic — the one serif moment, shared with the portal numerals */
+  .hero h1 .accent{font-family:'Fraunces',Georgia,serif;font-style:italic;font-weight:600;letter-spacing:-.01em;padding-right:.05em;background:linear-gradient(100deg,var(--gold-deep) 0%,var(--gold) 32%,#f6e3c4 50%,var(--gold) 68%,var(--gold-deep) 100%);background-size:220% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;}
+  @media (prefers-reduced-motion:no-preference){
+    .hero h1 .accent{animation:shimmer 7s ease-in-out 1.2s infinite;}
+    @keyframes shimmer{0%,100%{background-position:0% 0;}50%{background-position:100% 0;}}
+  }
+  .hero-sub{color:#aab6c9;font-size:17.5px;line-height:1.65;max-width:52ch;margin:0 0 34px;}
+
+  .trust{display:flex;flex-wrap:wrap;gap:26px;margin-top:8px;}
+  .trust-item{display:flex;align-items:center;gap:10px;font-size:14.5px;color:#c3cddd;}
+  .trust-item .ic{width:32px;height:32px;border-radius:9px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.14);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+  .trust-item svg{width:16px;height:16px;stroke:var(--gold-bright);fill:none;stroke-width:2;}
+
+  @media (prefers-reduced-motion:no-preference){
+    .reveal{opacity:0;transform:translateY(18px);animation:rise 700ms cubic-bezier(.2,.8,.2,1) forwards;}
+    .reveal.r2{animation-delay:120ms;} .reveal.r3{animation-delay:240ms;} .reveal.r4{animation-delay:380ms;} .reveal.r5{animation-delay:520ms;}
+    @keyframes rise{to{opacity:1;transform:translateY(0);}}
+  }
+
+  /* ===== Access card ===== */
+  .card{background:rgba(255,255,255,.06);backdrop-filter:blur(18px) saturate(140%);-webkit-backdrop-filter:blur(18px) saturate(140%);border:1px solid rgba(217,168,103,.28);border-radius:var(--radius-lg);padding:36px;box-shadow:var(--shadow-lg),0 1px 0 rgba(255,255,255,.08) inset;position:relative;overflow:hidden;}
+  .card::before{content:"";position:absolute;inset:0;background:radial-gradient(420px 220px at 20% -10%,rgba(217,168,103,.14),transparent 70%);pointer-events:none;}
+  .card h2{font-size:23px;color:#fff;margin-bottom:6px;}
+  .card p.sub{color:#aab6c9;font-size:14.5px;margin:0 0 22px;}
+  .field{position:relative;margin-bottom:14px;}
+  .field svg{position:absolute;left:16px;top:50%;transform:translateY(-50%);width:18px;height:18px;stroke:#8d99ad;fill:none;stroke-width:2;pointer-events:none;}
+  #lookup{width:100%;height:58px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.16);border-radius:var(--radius-md);color:#fff;font-family:var(--font-ui);font-size:15.5px;padding:0 16px 0 46px;outline:none;transition:border-color 180ms ease, box-shadow 180ms ease, background-color 180ms ease;}
+  #lookup::placeholder{color:#7c88a0;}
+  #lookup:focus{background:rgba(255,255,255,.08);border-color:var(--gold);box-shadow:0 0 0 4px rgba(217,168,103,.2),0 0 30px rgba(217,168,103,.22);}
+  #lookup.matched{border-color:var(--accent-live, var(--gold));box-shadow:0 0 0 4px color-mix(in srgb, var(--accent-live, var(--gold)) 24%, transparent);}
+
+  .cta{width:100%;height:58px;border:0;border-radius:var(--radius-md);font-family:var(--font-ui);font-size:15.5px;font-weight:700;color:#20160a;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:10px;position:relative;overflow:hidden;background:linear-gradient(160deg,var(--gold-bright) 0%, var(--gold-deep) 100%);box-shadow:0 1px 0 rgba(255,255,255,.35) inset, 0 8px 26px rgba(217,168,103,.35);transition:filter 180ms ease, box-shadow 180ms ease, transform 110ms ease, background 220ms ease;}
+  .cta::after{content:"";position:absolute;top:0;bottom:0;left:-80%;width:50%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.35),transparent);transform:skewX(-20deg);transition:left 480ms ease;}
+  .cta:hover::after,.cta:focus-visible::after{left:130%;}
+  .cta:hover,.cta:focus-visible{filter:brightness(1.06);box-shadow:0 1px 0 rgba(255,255,255,.4) inset,0 12px 32px rgba(217,168,103,.45);transform:translateY(-1px);}
+  .cta:active{transform:scale(.98);}
+  .cta.matched{background:linear-gradient(160deg,var(--m-light,var(--gold-bright)) 0%, var(--m-deep,var(--gold-deep)) 100%);box-shadow:0 1px 0 rgba(255,255,255,.35) inset,0 8px 26px var(--m-glow,rgba(217,168,103,.35));}
+  .cta .arrow{transition:transform 160ms ease;}
+  .cta:hover .arrow{transform:translateX(3px);}
+
+  .helper{text-align:center;font-size:13px;color:#8d99ad;margin-top:16px;}
+  .helper a{color:var(--gold-bright);text-decoration:none;}
+
+  .badge-pop{display:none;align-items:center;gap:8px;font-size:13px;font-weight:600;color:#fff;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.2);border-radius:999px;padding:6px 14px;margin-bottom:14px;width:fit-content;}
+  .badge-pop.show{display:inline-flex;animation:pop 320ms cubic-bezier(.34,1.56,.64,1);}
+  .badge-pop .tri{width:0;height:0;border-left:4px solid transparent;border-right:4px solid transparent;border-bottom:7px solid var(--tri-color, currentColor);}
+  @keyframes pop{from{transform:scale(.8);opacity:0;}to{transform:scale(1);opacity:1;}}
+
+  .no-match{display:none;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.14);border-radius:var(--radius-md);padding:16px 18px;margin-bottom:14px;font-size:13.5px;color:#c3cddd;line-height:1.6;}
+  .no-match.show{display:block;animation:pop 260ms ease;}
+  .no-match strong{color:#fff;}
+  .no-match .sugg{display:inline-flex;gap:8px;margin-top:8px;}
+  .no-match button{background:rgba(217,168,103,.14);border:1px solid rgba(217,168,103,.4);color:var(--gold-bright);font-size:12.5px;font-weight:600;border-radius:999px;padding:5px 12px;cursor:pointer;font-family:var(--font-ui);}
+  .no-match button:hover{background:rgba(217,168,103,.22);}
+
+  /* ===== Footer ===== */
+  footer{background:var(--panel);border-top:1px solid var(--line);}
+  .footer-inner{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;padding:28px 0;font-size:13px;color:var(--muted);}
+  footer a{color:var(--navy);text-decoration:none;font-weight:600;}
+  footer strong{color:var(--text);}
+
+  /* ===== Transition wipe ===== */
+  .wipe{position:fixed;inset:0;z-index:200;pointer-events:none;display:flex;align-items:center;justify-content:center;opacity:0;}
+  .wipe.active{pointer-events:all;}
+  .wipe-fill{position:absolute;inset:0;background:var(--ink);clip-path:polygon(50% -20%, -20% 120%, 120% 120%);transform:scale(0);transform-origin:center;}
+  .wipe.active .wipe-fill{animation:wipe-in 620ms cubic-bezier(.65,0,.35,1) forwards;}
+  @keyframes wipe-in{to{transform:scale(3.2);}}
+  .wipe-mark{position:relative;width:0;height:0;border-left:34px solid transparent;border-right:34px solid transparent;border-bottom:58px solid var(--gold-bright);opacity:0;}
+  .wipe.active .wipe-mark{animation:mark-in 620ms cubic-bezier(.34,1.56,.64,1) 80ms forwards;}
+  @keyframes mark-in{0%{opacity:0;transform:scale(.4) rotate(-10deg);}60%{opacity:1;}100%{opacity:1;transform:scale(1) rotate(0);}}
+  @media (prefers-reduced-motion:reduce){
+    .wipe, .wipe-fill, .wipe-mark{animation:none !important;display:none !important;}
+  }
+
+  @media (max-width:640px){
+    .hero{padding:120px 0 130px;}
+    .card{padding:26px;}
+    .topbar{padding-top:20px;}
+    .hero-tri{width:380px;height:340px;}
+  }
+</style>
+</head>
+<body>
+<a href="#lookup" class="skip-link">Skip to employer lookup</a>
+
+<section class="hero">
+  <span class="blob blob-gold" aria-hidden="true"></span>
+  <span class="blob blob-blue" aria-hidden="true"></span>
+  <svg class="hero-tri" viewBox="0 0 200 180" aria-hidden="true">
+    <path d="M100 4 L196 176 L4 176 Z" fill="none" stroke="rgba(217,168,103,.35)" stroke-width="1.5"/>
+    <path d="M100 60 L155 158 L45 158 Z" fill="rgba(72,125,169,.14)"/>
+  </svg>
+
+  <header class="topbar">
+    <div class="shell topbar-inner">
+      <span class="brand-plate"><img src="maverick-logo.png" alt="Maverick Administrators" /></span>
+      <span class="powered"><span class="dot" aria-hidden="true"></span>Powered by Cost Plus Drugs</span>
+    </div>
+  </header>
+
+  <div class="shell hero-inner">
+    <div class="grid">
+      <div>
+        <p class="eyebrow reveal"><span class="tri" aria-hidden="true"></span>Prescription Savings Program</p>
+        <h1 class="reveal r2">Save on your<br><span class="accent">prescriptions.</span><br>Get rewarded.</h1>
+        <p class="hero-sub reveal r3">Your employer offers a prescription savings benefit through Mark Cuban&rsquo;s Cost Plus Drugs — where generic medications cost a fraction of retail price. Fill your prescription, submit your receipt, and get paid back.</p>
+        <div class="trust reveal r4">
+          <span class="trust-item"><span class="ic"><svg viewBox="0 0 24 24"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="9"/></svg></span>Full reimbursement</span>
+          <span class="trust-item"><span class="ic"><svg viewBox="0 0 24 24"><path d="M20 12v7a1 1 0 01-1 1H5a1 1 0 01-1-1v-7"/><rect x="2" y="7" width="20" height="5"/><path d="M12 22V7"/><path d="M12 7S9 2 6 2a2.5 2.5 0 000 5h6z"/><path d="M12 7s3-5 6-5a2.5 2.5 0 010 5h-6z"/></svg></span>Up to $50 reward per fill</span>
+          <span class="trust-item"><span class="ic"><svg viewBox="0 0 24 24"><path d="M12 2l8 4v5c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/></svg></span>Covered by your employer</span>
+        </div>
+      </div>
+
+      <div class="card reveal r5">
+        <h2>Access your member portal</h2>
+        <p class="sub">Enter your employer&rsquo;s name to get started</p>
+
+        <div class="badge-pop" id="matchBadge" role="status"><span class="tri" aria-hidden="true"></span><span id="matchLabel"></span></div>
+        <div class="no-match" id="noMatch" role="status">
+          We couldn&rsquo;t find &ldquo;<strong id="noMatchTerm"></strong>.&rdquo; Try one of these:
+          <div class="sugg">
+            <button type="button" data-slug="alkeme">Alkeme</button>
+            <button type="button" data-slug="acme-corporation">Acme Corporation</button>
+          </div>
+        </div>
+
+        <div class="field">
+          <svg viewBox="0 0 24 24"><path d="M3 21h18"/><path d="M5 21V7l7-4 7 4v14"/><line x1="9" y1="10" x2="9" y2="10.01"/><line x1="15" y1="10" x2="15" y2="10.01"/></svg>
+          <input id="lookup" type="text" placeholder="e.g. Alkeme, Acme Corporation…" autocomplete="off" />
+        </div>
+        <button class="cta" id="ctaBtn" type="button"><span>Access my benefits</span><span class="arrow" aria-hidden="true">→</span></button>
+        <p class="helper">Not sure of your employer name? Contact your <a href="mailto:support@mavericktpa.com">HR department</a>.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero-wave" aria-hidden="true">
+    <svg viewBox="0 0 1440 96" preserveAspectRatio="none">
+      <path d="M0,46 C240,100 480,4 720,36 C960,68 1200,90 1440,40 L1440,96 L0,96 Z" fill="#ffffff"/>
+      <path d="M0,46 C240,100 480,4 720,36 C960,68 1200,90 1440,40" fill="none" stroke="rgba(217,168,103,.5)" stroke-width="2"/>
+    </svg>
+  </div>
+</section>
+
+<footer>
+  <div class="shell footer-inner">
+    <span>Cost Plus Drugs Member Program, administered by <strong>Maverick Administrators</strong>.</span>
+    <span>Questions? Email <a href="mailto:support@mavericktpa.com">support@mavericktpa.com</a></span>
+  </div>
+</footer>
+
+<div class="wipe" id="wipe" aria-hidden="true">
+  <div class="wipe-fill"></div>
+  <div class="wipe-mark"></div>
+</div>
+
+<script>
+  var COMPANIES = {
+    "alkeme": { name: "Alkeme", accent: "#487DA9", accentDeep: "#2E5A83", glow: "rgba(72,125,169,.4)" },
+    "acme corporation": { name: "Acme Corporation", accent: "#6E5BD1", accentDeep: "#4A3B99", glow: "rgba(110,91,209,.4)" },
+    "acme": { name: "Acme Corporation", accent: "#6E5BD1", accentDeep: "#4A3B99", glow: "rgba(110,91,209,.4)" }
+  };
+  var input = document.getElementById('lookup');
+  var cta = document.getElementById('ctaBtn');
+  var badge = document.getElementById('matchBadge');
+  var matchLabel = document.getElementById('matchLabel');
+  var noMatch = document.getElementById('noMatch');
+  var noMatchTerm = document.getElementById('noMatchTerm');
+  var wipe = document.getElementById('wipe');
+  var current = null;
+
+  function slugify(name){ return name.toLowerCase().replace(/\s+/g,'-'); }
+
+  function checkMatch(){
+    var q = input.value.trim().toLowerCase();
+    noMatch.classList.remove('show');
+    if(!q){ current = null; input.classList.remove('matched'); badge.classList.remove('show'); resetCta(); return; }
+    var hit = COMPANIES[q] || Object.keys(COMPANIES).map(function(k){return COMPANIES[k];}).find(function(c){ return c.name.toLowerCase().indexOf(q) === 0; });
+    if(hit){
+      current = hit;
+      input.classList.add('matched');
+      input.style.setProperty('--accent-live', hit.accent);
+      badge.classList.add('show');
+      badge.style.setProperty('--tri-color', hit.accent);
+      matchLabel.textContent = hit.name;
+      cta.classList.add('matched');
+      cta.style.setProperty('--m-light', hit.accent);
+      cta.style.setProperty('--m-deep', hit.accentDeep);
+      cta.style.setProperty('--m-glow', hit.glow);
+    } else {
+      current = null;
+      input.classList.remove('matched');
+      badge.classList.remove('show');
+      resetCta();
+    }
+  }
+  function resetCta(){
+    cta.classList.remove('matched');
+    cta.style.removeProperty('--m-light');
+    cta.style.removeProperty('--m-deep');
+    cta.style.removeProperty('--m-glow');
+  }
+
+  input.addEventListener('input', checkMatch);
+  input.addEventListener('keydown', function(e){ if(e.key === 'Enter'){ e.preventDefault(); go(); } });
+  cta.addEventListener('click', go);
+  document.querySelectorAll('.no-match button').forEach(function(b){
+    b.addEventListener('click', function(){
+      var slug = b.getAttribute('data-slug');
+      var c = Object.keys(COMPANIES).map(function(k){return COMPANIES[k];}).find(function(x){return slugify(x.name)===slug;});
+      input.value = c.name; checkMatch();
+    });
+  });
+
+  function go(){
+    var q = input.value.trim().toLowerCase();
+    if(!q){ input.focus(); return; }
+    if(!current){
+      noMatchTerm.textContent = input.value.trim();
+      noMatch.classList.add('show');
+      return;
+    }
+    var slug = slugify(current.name);
+    var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    try{ sessionStorage.setItem('mvkArrive','1'); }catch(err){} // portal continues the wipe
+    if(reduced){ window.location.href = slug + '.html'; return; }
+    wipe.classList.add('active');
+    setTimeout(function(){ window.location.href = slug + '.html'; }, 560);
+  }
+</script>
+</body>
+</html>
