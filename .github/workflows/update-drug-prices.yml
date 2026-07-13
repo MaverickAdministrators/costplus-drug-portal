@@ -1,0 +1,53 @@
+name: Update drug prices
+
+on:
+  schedule:
+    # Every Monday at 13:00 UTC
+    - cron: "0 13 * * 1"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: update-drug-prices
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: pip install -r scraper/requirements.txt
+
+      - name: Scrape costplusdrugs.com
+        run: python3 scraper/costplus_scraper.py
+
+      - name: Build data/drug-prices.json
+        run: python3 scraper/build_lookup_json.py
+
+      - name: Upload scraper output as audit artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: scraper-output
+          retention-days: 90
+          if-no-files-found: warn
+          path: |
+            scraper/output/costplusdrugs.db
+            scraper/output/costplusdrugs.csv
+            scraper/output/last_run.json
+
+      - name: Commit updated drug-prices.json
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "chore: weekly drug price data refresh"
+          file_pattern: data/drug-prices.json
