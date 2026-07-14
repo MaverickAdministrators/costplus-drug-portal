@@ -210,6 +210,17 @@
   .r-head{display:flex;align-items:center;gap:8px;font-size:11px;font-weight:600;letter-spacing:.14em;color:var(--muted);text-transform:uppercase;padding-bottom:12px;border-bottom:1px solid var(--line);margin-bottom:14px;}
   .r-head .mark{width:11px;height:9.5px;color:var(--accent);flex-shrink:0;}
   .r-drug{font-size:15px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;}
+  /* real-price line under the drug name (populated from data/drug-prices.json) */
+  .r-real{margin:5px 0 0;font-family:var(--font-ui);font-size:12px;color:var(--muted);line-height:1.6;}
+  .r-real strong{font-family:var(--font-mono);font-weight:700;color:var(--accent-deep);}
+  .r-real a{color:var(--accent-deep);font-weight:600;text-decoration:underline;text-underline-offset:2px;}
+  .r-real .r-variants{display:block;color:var(--faint);}
+  /* strength picker — reuses the page chip style, receipt-sized */
+  .r-strengths{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0 2px;}
+  .r-strengths .chip{padding:5px 12px;font-size:12px;}
+  .r-strengths .chip.sel{background:var(--accent-tint);border-color:var(--accent);color:var(--accent-deep);font-weight:700;}
+  .r-try .r-try-field + label{margin-top:10px;}
+  .r-hint{font-family:var(--font-ui);font-size:11px;color:var(--faint);margin:6px 0 0;}
   .r-tag{display:inline-block;font-size:10px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--accent-deep);border:1px solid var(--accent);border-radius:4px;padding:2px 7px;margin:6px 0 14px;opacity:.85;}
   .r-line{display:flex;justify-content:space-between;gap:16px;padding:4px 0;}
   .r-line .val{font-weight:600;white-space:nowrap;}
@@ -425,7 +436,7 @@
           <button type="button" class="chip" data-drug="Omeprazole"><svg viewBox="0 0 24 24"><path d="M4.5 12.5l7-7a5 5 0 017 7l-7 7a5 5 0 01-7-7z"/></svg>Omeprazole</button>
           <button type="button" class="chip" data-drug="Sertraline"><svg viewBox="0 0 24 24"><path d="M4.5 12.5l7-7a5 5 0 017 7l-7 7a5 5 0 01-7-7z"/></svg>Sertraline</button>
           <button type="button" class="chip" data-drug="Amlodipine"><svg viewBox="0 0 24 24"><path d="M4.5 12.5l7-7a5 5 0 017 7l-7 7a5 5 0 01-7-7z"/></svg>Amlodipine</button>
-          <button type="button" class="chip" data-drug="Gabapentin"><svg viewBox="0 0 24 24"><path d="M4.5 12.5l7-7a5 5 0 017 7l-7 7a5 5 0 01-7-7z"/></svg>Gabapentin</button>
+          <button type="button" class="chip" data-drug="Metoprolol"><svg viewBox="0 0 24 24"><path d="M4.5 12.5l7-7a5 5 0 017 7l-7 7a5 5 0 01-7-7z"/></svg>Metoprolol</button>
           <button type="button" class="chip" data-drug="Levothyroxine"><svg viewBox="0 0 24 24"><path d="M4.5 12.5l7-7a5 5 0 017 7l-7 7a5 5 0 01-7-7z"/></svg>Levothyroxine</button>
           <button type="button" class="chip" data-drug="Montelukast"><svg viewBox="0 0 24 24"><path d="M4.5 12.5l7-7a5 5 0 017 7l-7 7a5 5 0 01-7-7z"/></svg>Montelukast</button>
           <button type="button" class="chip" data-drug="Losartan"><svg viewBox="0 0 24 24"><path d="M4.5 12.5l7-7a5 5 0 017 7l-7 7a5 5 0 01-7-7z"/></svg>Losartan</button>
@@ -690,6 +701,26 @@
     var goBtn = document.querySelector('.search-row button');
     if(!wrap || !paper || !search) return;
 
+    // Real catalog (data/drug-prices.json, refreshed weekly by CI). Until it
+    // loads — or if it fails — the receipt falls back to formula-only.
+    var meds = null, generatedAt = null;
+    fetch('data/drug-prices.json')
+      .then(function(r){ return r.ok ? r.json() : null; })
+      .then(function(d){ if(d && d.medications){ meds = d.medications; generatedAt = d.generated_at; } })
+      .catch(function(){});
+
+    function escapeRegex(s){ return s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); }
+    function fmtDate(iso){
+      var d = new Date(iso);
+      return isNaN(d) ? '' : d.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+    }
+    // Whole-word match only: "Omeprazole" must not surface Esomeprazole.
+    function findMatches(q){
+      if(!meds) return null;
+      var re = new RegExp('\\b' + escapeRegex(q), 'i');
+      return meds.filter(function(m){ return re.test(m.name || '') || re.test(m.brand_name || ''); });
+    }
+
     function money(n){ return '$' + n.toFixed(2); }
     function esc(s){ return s.replace(/[&<>"]/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]; }); }
     function line(label, val, cls, role){
@@ -699,53 +730,127 @@
     function print(name){
       var q = name.trim();
       if(!q){ search.focus(); return; }
-      var html = '<div class="r-head"><svg class="mark" aria-hidden="true"><use href="#mvk-mark"/></svg>Maverick benefit &middot; how it pays</div>';
-      html += '<div class="r-drug">' + esc(q) + '</div>';
-      html += '<span class="r-tag">Your reimbursement formula</span>';
-      html += line('You pay at checkout', 'Cost Plus price', '', 'pay');
-      html += line('Maverick reimburses', '100% of it', 'accent', 'back');
-      html += line('Savings reward', '+10% &middot; up to $50', 'gold', 'reward');
-      html += '<div class="r-rule"></div>';
-      html += line('Your net cost', '$0.00', 'net');
-      html += line('Paid to you', 'the reward', 'gold', 'paid');
-      html += '<div class="r-try">';
-      html += '<label for="tryAmt">Try it &mdash; enter what you&rsquo;d pay at checkout:</label>';
-      html += '<div class="r-try-field"><span class="cur" aria-hidden="true">$</span><input id="tryAmt" type="text" inputmode="decimal" placeholder="0.00" autocomplete="off"></div>';
-      html += '<p class="r-cap" data-role="cap">Reward capped at $50 per fill.</p>';
-      html += '</div>';
-      html += '<div><span class="r-stamp"><svg class="mark" aria-hidden="true"><use href="#mvk-mark"/></svg> Covered by your employer</span></div>';
-      html += '<a class="r-cta" href="https://costplusdrugs.com" target="_blank" rel="noopener">Check the real price for ' + esc(q) + ' on costplusdrugs.com <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg></a>';
-      html += '<p class="r-foot">Prices change &mdash; always confirm the current price on costplusdrugs.com before ordering.</p>';
-
-      paper.innerHTML = html;
-      wrap.classList.remove('printed');
-      void wrap.offsetHeight; // restart the print animation
-      wrap.classList.add('printed');
-
-      // live formula: member's own number in, reimbursement math out
-      var amt = paper.querySelector('#tryAmt');
-      var pay = paper.querySelector('[data-role="pay"]');
-      var back = paper.querySelector('[data-role="back"]');
-      var reward = paper.querySelector('[data-role="reward"]');
-      var paid = paper.querySelector('[data-role="paid"]');
-      var cap = paper.querySelector('[data-role="cap"]');
-      amt.addEventListener('input', function(){
-        var v = parseFloat(amt.value.replace(/[^0-9.]/g, ''));
-        if(isFinite(v) && v > 0){
-          var r = Math.min(v * .10, 50);
-          pay.textContent = money(v);
-          back.textContent = '−' + money(v);
-          reward.textContent = '+' + money(r);
-          paid.textContent = '+' + money(r);
-          cap.classList.toggle('show', v * .10 > 50);
-        } else {
-          pay.textContent = 'Cost Plus price';
-          back.textContent = '100% of it';
-          reward.textContent = '+10% · up to $50';
-          paid.textContent = 'the reward';
-          cap.classList.remove('show');
-        }
+      var matches = findMatches(q);
+      var best = null;
+      (matches || []).forEach(function(m){
+        if(typeof m.our_price === 'number' && (!best || m.our_price < best.our_price)) best = m;
       });
+
+      // Every real strength of the matched drug (rows sharing its catalog
+      // `name`), cheapest row per strength. The data holds one price per
+      // strength — Cost Plus's own default fill — and prices do NOT scale
+      // linearly with quantity, so never extrapolate other counts from it.
+      var variants = [];
+      if(best){
+        var byStrength = {};
+        matches.forEach(function(m){
+          if(m.name !== best.name || typeof m.our_price !== 'number') return;
+          var key = m.strength || m.slug;
+          if(!byStrength[key] || m.our_price < byStrength[key].our_price) byStrength[key] = m;
+        });
+        variants = Object.keys(byStrength).map(function(k){ return byStrength[k]; });
+        variants.sort(function(a, b){ return (parseFloat(a.strength) || 0) - (parseFloat(b.strength) || 0); });
+      }
+
+      render(best, true);
+
+      function render(sel, animate){
+        var html = '<div class="r-head"><svg class="mark" aria-hidden="true"><use href="#mvk-mark"/></svg>Maverick benefit &middot; how it pays</div>';
+        html += '<div class="r-drug">' + esc(q) + '</div>';
+        if(sel){
+          var when = fmtDate(generatedAt);
+          html += '<p class="r-real"><strong>' + money(sel.our_price) + '</strong> &mdash; ' + esc(sel.name + (sel.strength ? ' ' + sel.strength : ''));
+          html += when ? (', as of ' + esc(when)) : '';
+          html += ' &middot; <a href="' + esc(sel.url) + '" target="_blank" rel="noopener">confirm this price</a>';
+          html += '<span class="r-variants">Priced for Cost Plus&rsquo;s standard ' + (sel.default_quantity > 1 ? sel.default_quantity + '-count ' : '') + 'fill. Other quantities are priced individually at checkout on costplusdrugs.com.</span>';
+          html += '</p>';
+          if(variants.length > 1){
+            html += '<div class="r-strengths" role="group" aria-label="Available strengths">';
+            variants.forEach(function(v, i){
+              html += '<button type="button" class="chip' + (v === sel ? ' sel' : '') + '" aria-pressed="' + (v === sel) + '" data-i="' + i + '">' + esc(v.strength || v.package_size || 'option') + '</button>';
+            });
+            html += '</div>';
+          }
+        } else if(matches){
+          html += '<p class="r-real">We couldn&rsquo;t find an exact match in this week&rsquo;s catalog &mdash; check <a href="https://costplusdrugs.com" target="_blank" rel="noopener">costplusdrugs.com</a> directly; any medication available there is eligible for reimbursement.</p>';
+        }
+        html += '<span class="r-tag">Your reimbursement formula</span>';
+        html += line('You pay at checkout', 'Cost Plus price', '', 'pay');
+        html += line('Maverick reimburses', '100% of it', 'accent', 'back');
+        html += line('Savings reward', '+10% of savings &middot; up to $50', 'gold', 'reward');
+        html += '<div class="r-rule"></div>';
+        html += line('Your net cost', '$0.00', 'net');
+        html += line('Paid to you', 'the reward', 'gold', 'paid');
+        html += '<div class="r-try">';
+        html += '<label for="tryPay">Try it &mdash; you pay at Cost Plus:</label>';
+        html += '<div class="r-try-field"><span class="cur" aria-hidden="true">$</span><input id="tryPay" type="text" inputmode="decimal" placeholder="0.00" autocomplete="off"></div>';
+        html += '<label for="tryRetail">Retail price elsewhere:</label>';
+        html += '<div class="r-try-field"><span class="cur" aria-hidden="true">$</span><input id="tryRetail" type="text" inputmode="decimal" placeholder="0.00" autocomplete="off"></div>';
+        html += '<p class="r-hint">Check GoodRx or a recent pharmacy receipt if you&rsquo;re not sure.</p>';
+        html += '<p class="r-cap" data-role="cap">Reward capped at $50 per fill.</p>';
+        html += '</div>';
+        html += '<div><span class="r-stamp"><svg class="mark" aria-hidden="true"><use href="#mvk-mark"/></svg> Covered by your employer</span></div>';
+        html += '<a class="r-cta" href="https://costplusdrugs.com" target="_blank" rel="noopener">Check the real price for ' + esc(q) + ' on costplusdrugs.com <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg></a>';
+        html += '<p class="r-foot">Prices change &mdash; always confirm the current price on costplusdrugs.com before ordering.</p>';
+
+        paper.innerHTML = html;
+        if(animate){
+          wrap.classList.remove('printed');
+          void wrap.offsetHeight; // restart the print animation
+          wrap.classList.add('printed');
+        }
+
+        // live formula: the member's own two numbers in, reimbursement math
+        // out. Reward = 10% of what they SAVED vs retail (capped at $50) —
+        // it needs both numbers, so with either one missing we show the
+        // generic placeholders instead of guessing.
+        var payIn = paper.querySelector('#tryPay');
+        var retailIn = paper.querySelector('#tryRetail');
+        var pay = paper.querySelector('[data-role="pay"]');
+        var back = paper.querySelector('[data-role="back"]');
+        var reward = paper.querySelector('[data-role="reward"]');
+        var paid = paper.querySelector('[data-role="paid"]');
+        var cap = paper.querySelector('[data-role="cap"]');
+        function num(el){
+          var v = parseFloat(el.value.replace(/[^0-9.]/g, ''));
+          return (isFinite(v) && v > 0) ? v : null;
+        }
+        function recalc(){
+          var p = num(payIn), r = num(retailIn);
+          if(p !== null){
+            pay.textContent = money(p);
+            back.textContent = '−' + money(p);
+          } else {
+            pay.textContent = 'Cost Plus price';
+            back.textContent = '100% of it';
+          }
+          if(p !== null && r !== null){
+            var rew = Math.min(Math.max(r - p, 0) * .10, 50);
+            reward.textContent = '+' + money(rew);
+            paid.textContent = '+' + money(rew);
+            cap.classList.toggle('show', (r - p) * .10 > 50);
+          } else {
+            reward.textContent = '+10% of savings · up to $50';
+            paid.textContent = 'the reward';
+            cap.classList.remove('show');
+          }
+        }
+        payIn.addEventListener('input', recalc);
+        retailIn.addEventListener('input', recalc);
+
+        paper.querySelectorAll('.r-strengths .chip').forEach(function(b){
+          b.addEventListener('click', function(){ render(variants[+b.dataset.i], false); });
+        });
+
+        // Prefill both fields with this strength's real numbers (still editable).
+        if(sel){
+          payIn.value = sel.our_price.toFixed(2);
+          if(typeof sel.retail_price_other_pharmacies === 'number'){
+            retailIn.value = sel.retail_price_other_pharmacies.toFixed(2);
+          }
+          payIn.dispatchEvent(new Event('input'));
+        }
+      }
     }
 
     goBtn.addEventListener('click', function(){ print(search.value); });
