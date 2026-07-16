@@ -928,7 +928,7 @@
         html += line('Savings reward', '+10% of savings &middot; up to $50', 'gold', 'reward');
         html += '<div class="r-rule"></div>';
         html += line('Your net cost', '$0.00', 'net');
-        html += line('Paid to you', 'the reward', 'gold', 'paid');
+        html += line('Paid to you', 'your payment + reward', 'gold', 'paid');
         html += '<div class="r-try">';
         html += '<label for="tryPay">Try it &mdash; you pay at Cost Plus:</label>';
         html += '<div class="r-try-field"><span class="cur" aria-hidden="true">$</span><input id="tryPay" type="text" inputmode="decimal" placeholder="0.00" autocomplete="off"></div>';
@@ -975,11 +975,12 @@
           if(p !== null && r !== null){
             var rew = Math.min(Math.max(r - p, 0) * .10, 50);
             reward.textContent = '+' + money(rew);
-            paid.textContent = '+' + money(rew);
+            // full reimbursement: what they paid at Cost Plus + the reward
+            paid.textContent = '+' + money(p + rew);
             cap.classList.toggle('show', (r - p) * .10 > 50);
           } else {
             reward.textContent = '+10% of savings · up to $50';
-            paid.textContent = 'the reward';
+            paid.textContent = 'your payment + reward';
             cap.classList.remove('show');
           }
         }

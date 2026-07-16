@@ -64,7 +64,7 @@ for (const PAGE of pages) {
   ok(await page.locator('[data-role="pay"]').innerText() === '$10.00', 'pay line = $10.00');
   ok((await page.locator('[data-role="back"]').innerText()).includes('$10.00'), 'reimburse line mirrors pay');
   ok(await page.locator('[data-role="reward"]').innerText() === '+$9.00', 'reward = +$9.00 (10% of $90 saved)');
-  ok(await page.locator('[data-role="paid"]').innerText() === '+$9.00', 'paid-to-you mirrors reward');
+  ok(await page.locator('[data-role="paid"]').innerText() === '+$19.00', 'paid-to-you = payment + reward');
   ok(!(await page.locator('[data-role="cap"]').evaluate(el => el.classList.contains('show'))), 'cap note hidden under $50');
 
   await page.fill('#tryRetail', '800');
