@@ -1038,6 +1038,14 @@
     }
 
     function money(n){ return '$' + n.toFixed(2); }
+    // Truncates (never rounds) to whole cents. toFixed(2) on a raw float
+    // rounds the third decimal up (e.g. 6.427 -> "6.43"), which would
+    // overpay the reward. A naive Math.floor(n*100)/100 is unsafe too:
+    // binary float noise can turn an exact value like 42.30*0.10 (4.23)
+    // into 4.2299999999999995, which floor() would wrongly chop to 4.22.
+    // So we round to a tenth of a cent first (kills the float noise),
+    // then floor.
+    function truncateCents(n){ return Math.floor(Math.round(n * 1000) / 10) / 100; }
     function esc(s){ return s.replace(/[&<>"]/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]; }); }
     function line(label, val, cls, role){
       return '<div class="r-line ' + (cls || '') + '"><span>' + label + '</span><span class="val"' + (role ? ' data-role="' + role + '"' : '') + '>' + val + '</span></div>';
@@ -1141,7 +1149,7 @@
             back.textContent = '100% of it';
           }
           if(p !== null && r !== null){
-            var rew = Math.min(Math.max(r - p, 0) * .10, 50);
+            var rew = truncateCents(Math.min(Math.max(r - p, 0) * .10, 50));
             reward.textContent = '+' + money(rew);
             // full reimbursement: what they paid at Cost Plus + the reward
             paid.textContent = '+' + money(p + rew);

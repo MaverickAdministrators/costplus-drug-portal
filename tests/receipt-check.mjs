@@ -1,11 +1,12 @@
 // End-to-end checks for the "Check Your Drug" lookup and savings receipt.
-// 24 assertions per portal file:
+// 26 assertions per portal file:
 //   1. searching a real drug prints the receipt with a real price line
 //   2. strength chips exist, switch selection, and update the prefilled amount
 //   3. typing into the try-it calculator updates the reward live
 //   4. the $50 cap note appears when 10% of savings exceeds $50, hides otherwise
 //   5. unknown drugs fall back to the formula-only no-match copy
 //   6. over file:// (data fetch blocked) the receipt still prints formula-only, no page errors
+//   7. the reward truncates fractional cents instead of rounding up (e.g. $6.427 -> $6.42, not $6.43)
 //
 // Usage:
 //   npm test                       -> both portal files
@@ -66,6 +67,12 @@ for (const PAGE of pages) {
   ok(await page.locator('[data-role="reward"]').innerText() === '+$9.00', 'reward = +$9.00 (10% of $90 saved)');
   ok(await page.locator('[data-role="paid"]').innerText() === '+$19.00', 'paid-to-you = payment + reward');
   ok(!(await page.locator('[data-role="cap"]').evaluate(el => el.classList.contains('show'))), 'cap note hidden under $50');
+
+  await page.fill('#tryPay', '25.73');
+  await page.fill('#tryRetail', '90.00');
+  await page.waitForTimeout(100);
+  ok(await page.locator('[data-role="reward"]').innerText() === '+$6.42', 'reward truncates fractional cents (64.27 * 10% = 6.427 -> $6.42, not $6.43)');
+  ok(await page.locator('[data-role="paid"]').innerText() === '+$32.15', 'paid-to-you reflects the truncated reward');
 
   await page.fill('#tryRetail', '800');
   await page.waitForTimeout(100);
