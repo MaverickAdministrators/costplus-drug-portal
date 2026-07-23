@@ -58,7 +58,9 @@
   .brand-plate{display:inline-flex;align-items:center;background:linear-gradient(180deg,#fefdfb,#FCF3E1);border:1px solid rgba(244,189,80,.55);border-radius:12px;padding:9px 18px;box-shadow:0 1px 0 rgba(255,255,255,.9) inset,0 4px 14px rgba(0,0,0,.4);}
   .brand-plate img{height:28px;width:auto;display:block;}
   /* co-brand as a ruled mono tag off the foil edge — not a status pill */
-  .powered{display:inline-flex;align-items:center;font-family:var(--font-mono);font-size:11.5px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#b9c4d6;border-left:1px solid rgba(244,189,80,.45);padding:3px 0 3px 16px;white-space:nowrap;}
+  .powered{display:inline-flex;align-items:center;gap:12px;font-family:var(--font-mono);font-size:11.5px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#b9c4d6;border-left:1px solid rgba(244,189,80,.45);padding:3px 0 3px 16px;white-space:nowrap;}
+  .powered .brand-plate{padding:5px 10px;border-radius:8px;}
+  .powered .brand-plate img{height:14px;}
   .powered .dot{display:none;}
 
   /* ===== Hero — the administrator's desk =====
@@ -245,6 +247,7 @@
   .site-foot::before{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.03) 1px,transparent 1px);background-size:44px 44px;mask-image:linear-gradient(0deg,rgba(0,0,0,.75),transparent 80%);-webkit-mask-image:linear-gradient(0deg,rgba(0,0,0,.75),transparent 80%);pointer-events:none;}
   .foot-top{position:relative;display:flex;align-items:flex-start;justify-content:space-between;gap:56px;padding:64px 0 48px;}
   .foot-brand{max-width:560px;}
+  .plate-powered{display:inline-flex;align-items:center;margin-left:14px;font-family:var(--font-mono);font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#b9c4d6;border-left:1px solid rgba(244,189,80,.45);padding:3px 0 3px 14px;white-space:nowrap;vertical-align:middle;}
   .foot-desc{margin:24px 0 0;font-size:15px;line-height:1.75;color:#C2CCDC;}
   .foot-desc strong{color:#e7ecf5;font-weight:600;}
   .foot-contact{text-align:right;flex-shrink:0;}
@@ -287,7 +290,8 @@
     .brand-plate{padding:7px 12px;}
     .brand-plate img{height:22px;}
     /* compact co-brand lockup: quiet two-line text instead of a wrapping pill */
-    .powered{background:none;border:0;padding:0;white-space:normal;max-width:124px;font-size:10.5px;letter-spacing:.08em;line-height:1.5;color:#ABB7CA;justify-content:flex-end;text-align:right;}
+    .powered{background:none;border:0;padding:0;white-space:normal;max-width:150px;font-size:10.5px;letter-spacing:.08em;line-height:1.5;color:#ABB7CA;justify-content:flex-end;text-align:right;}
+    .powered .brand-plate{display:none;}
     .powered .dot{display:none;}
     .eyebrow{font-size:11px;margin-bottom:22px;letter-spacing:.16em;}
     .eyebrow::before{width:22px;}
@@ -304,6 +308,14 @@
     .hero-rose{right:-130px;top:-150px;width:340px;height:340px;color:rgba(244,189,80,.11);stroke-width:.7;}
     .hero-frame{inset:10px 10px 20px;}
     .tear{height:8px;background-size:12px 8px;}
+  }
+
+  /* Marquee logo at the practical ceiling — desktop only; mobile keeps 22px.
+     Placed last so it wins the cascade over the base .hero shorthand; hero padding
+     grows with the plate to keep the measured 61px clearance. */
+  @media (min-width:981px){
+    .topbar-inner > .brand-plate img{height:88px;}
+    .hero{padding-top:190px;}
   }
 </style>
 </head>
@@ -322,8 +334,8 @@
 
   <header class="topbar">
     <div class="shell topbar-inner">
-      <span class="brand-plate"><img src="maverick-logo.png" alt="Maverick Administrators" /></span>
-      <span class="powered"><span class="dot" aria-hidden="true"></span>Powered by Cost Plus Drugs</span>
+      <span class="brand-plate"><img src="alkeme-rx-redirect-logo.png" alt="Alkeme Rx Redirect logo" /></span>
+      <span class="powered"><span class="brand-plate"><img src="maverick-logo.png" alt="Maverick Administrators" /></span>Powered by Maverick Administrators</span>
     </div>
   </header>
 
@@ -403,7 +415,7 @@
   <div class="shell">
     <div class="foot-top">
       <div class="foot-brand">
-        <span class="brand-plate"><img src="maverick-logo.png" alt="Maverick Administrators" /></span>
+        <span class="brand-plate"><img src="maverick-logo.png" alt="Maverick Administrators" /></span><span class="plate-powered">Powered by Maverick Administrators</span>
         <p class="foot-desc"><strong>Alkeme Rx Redirect</strong> lets you buy generic medications at CostPlusDrugs.com and get fully reimbursed &mdash; plus a Savings Reward &mdash; through your employer&rsquo;s benefit plan.</p>
       </div>
       <div class="foot-contact">
