@@ -15,12 +15,12 @@
      PAPER (the member's world — the stub, the belt's document). Environments
      are soft; documents are crisp (small radii, hairline rules, mono data). */
   :root {
-    --ink:#0B1322; --ink-2:#0F1B30; --ink-3:#16243D;
-    --bg:#E9EDF2; --paper:#FDFCF9; --panel:#ffffff;
+    --ink:#25475e; --ink-2:#203E52; --ink-3:#1C3647;
+    --bg:#EAEFF6; --paper:#FDFCF9; --panel:#ffffff;
     --text:#0A121F; --muted:#50617B; --faint:#8D99AD; --line:#D8DEE9;
-    --navy:#001F43;
-    --gold:#D9A867; --gold-bright:#E8C48C; --gold-deep:#B8874F;
-    --accent:#487DA9; --accent-deep:#2E5A83;
+    --navy:#25475e;
+    --gold:#F4BD50; --gold-bright:#F8D384; --gold-deep:#AF7F26;
+    --accent:#25475e; --accent-deep:#1A3444;
     --green:#22C55E;
     --radius-lg:20px; --radius-md:12px; --radius-sm:8px;
     --shadow-sm:0 1px 2px rgba(10,19,34,.06), 0 2px 10px rgba(10,19,34,.06);
@@ -44,7 +44,7 @@
   @media (prefers-reduced-motion:no-preference){ html{scroll-behavior:smooth;} }
   body{margin:0;font-family:var(--font-ui);color:var(--text);background:var(--bg);-webkit-font-smoothing:antialiased;line-height:1.5;display:flex;flex-direction:column;min-height:100vh;min-height:100svh;}
   h1,h2,h3{font-family:var(--font-display);margin:0;}
-  ::selection{background:rgba(72,125,169,.28);}
+  ::selection{background:rgba(37,71,94,.28);}
   /* the ring traces each object's own geometry — no imposed rounding */
   :focus-visible{outline:2px solid var(--ring);outline-offset:2px;}
   .skip-link{position:absolute;left:-9999px;top:8px;background:var(--ink);color:#fff;padding:10px 14px;border-radius:var(--radius-sm);font-weight:600;z-index:100;}
@@ -55,10 +55,10 @@
   /* ===== Top bar ===== */
   .topbar{position:absolute;top:0;left:0;right:0;z-index:10;padding-top:28px;}
   .topbar-inner{display:flex;align-items:center;justify-content:space-between;}
-  .brand-plate{display:inline-flex;align-items:center;background:linear-gradient(180deg,#fefdfb,#f4efe5);border:1px solid rgba(217,168,103,.55);border-radius:12px;padding:9px 18px;box-shadow:0 1px 0 rgba(255,255,255,.9) inset,0 4px 14px rgba(0,0,0,.4);}
+  .brand-plate{display:inline-flex;align-items:center;background:linear-gradient(180deg,#fefdfb,#FCF3E1);border:1px solid rgba(244,189,80,.55);border-radius:12px;padding:9px 18px;box-shadow:0 1px 0 rgba(255,255,255,.9) inset,0 4px 14px rgba(0,0,0,.4);}
   .brand-plate img{height:28px;width:auto;display:block;}
   /* co-brand as a ruled mono tag off the foil edge — not a status pill */
-  .powered{display:inline-flex;align-items:center;font-family:var(--font-mono);font-size:11.5px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#b9c4d6;border-left:1px solid rgba(217,168,103,.45);padding:3px 0 3px 16px;white-space:nowrap;}
+  .powered{display:inline-flex;align-items:center;font-family:var(--font-mono);font-size:11.5px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#b9c4d6;border-left:1px solid rgba(244,189,80,.45);padding:3px 0 3px 16px;white-space:nowrap;}
   .powered .dot{display:none;}
 
   /* ===== Hero — the administrator's desk =====
@@ -69,9 +69,9 @@
   .hero::before{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.035) 1px,transparent 1px);background-size:44px 44px;mask-image:linear-gradient(180deg,rgba(0,0,0,.8),transparent 85%);-webkit-mask-image:linear-gradient(180deg,rgba(0,0,0,.8),transparent 85%);pointer-events:none;}
   /* engraved lathework — the certificate's rosette, stamped under the stub */
   .rose{fill:none;stroke:currentColor;stroke-width:.5;}
-  .hero-rose{position:absolute;right:-170px;top:-190px;width:680px;height:680px;color:rgba(217,168,103,.15);stroke-width:.4;pointer-events:none;}
+  .hero-rose{position:absolute;right:-170px;top:-190px;width:680px;height:680px;color:rgba(244,189,80,.15);stroke-width:.4;pointer-events:none;}
   /* foil hairline frame — the whole hero is the instrument's cover */
-  .hero-frame{position:absolute;inset:18px 18px 30px;border:1px solid rgba(217,168,103,.18);border-radius:8px;pointer-events:none;}
+  .hero-frame{position:absolute;inset:18px 18px 30px;border:1px solid rgba(244,189,80,.18);border-radius:8px;pointer-events:none;}
 
   /* torn paper edge into the belt — the stub's perforation, at section scale */
   .tear{position:absolute;bottom:-1px;left:0;right:0;height:11px;background-image:linear-gradient(135deg,#fff 50%,transparent 50%),linear-gradient(-135deg,#fff 50%,transparent 50%);background-size:16px 11px;background-repeat:repeat-x;transform:scaleY(-1);filter:drop-shadow(0 3px 3px rgba(0,0,0,.30));pointer-events:none;}
@@ -88,13 +88,13 @@
   }
 
   .eyebrow{display:inline-flex;align-items:center;gap:12px;font-family:var(--font-mono);font-size:12px;font-weight:600;letter-spacing:.15em;text-transform:uppercase;color:#A9C4DD;margin:0 0 26px;}
-  .eyebrow::before{content:"";width:30px;height:1.5px;background:linear-gradient(90deg,var(--accent),transparent);}
+  .eyebrow::before{content:"";width:30px;height:1.5px;background:linear-gradient(90deg,color-mix(in srgb, var(--accent) 40%, #fff),transparent);}
   .eyebrow .mark{width:13px;height:11px;flex-shrink:0;}
 
   .hero h1{font-weight:600;font-size:clamp(40px,5.6vw,68px);line-height:1.1;letter-spacing:-.01em;margin-bottom:22px;}
   /* the money word gets stamped, not gradient-plated — receipts get stamps */
-  .hero h1 .accent{display:inline-block;font-style:italic;letter-spacing:-.005em;color:var(--gold-bright);padding:.01em .15em .07em;margin-left:.04em;border:2px solid rgba(217,168,103,.75);border-radius:10px;rotate:-2.2deg;}
-  .hero-sub{color:#aab6c9;font-size:17.5px;line-height:1.65;max-width:52ch;margin:0 0 34px;}
+  .hero h1 .accent{display:inline-block;font-style:italic;letter-spacing:-.005em;color:var(--gold-bright);padding:.01em .15em .07em;margin-left:.04em;border:2px solid rgba(244,189,80,.75);border-radius:10px;rotate:-2.2deg;}
+  .hero-sub{color:#C2CCDC;font-size:17.5px;line-height:1.65;max-width:52ch;margin:0 0 34px;}
 
   /* trust items as the ticket's fine-print manifest — ruled mono line, not chips */
   .trust{display:flex;flex-wrap:wrap;align-items:center;gap:10px 22px;margin-top:8px;padding:15px 2px;border-top:1px solid rgba(255,255,255,.14);border-bottom:1px solid rgba(255,255,255,.14);max-width:640px;}
@@ -142,7 +142,7 @@
   #lookup{width:100%;height:56px;background:#fff;border:1.5px solid var(--line);border-radius:8px;color:var(--text);font-family:var(--font-ui);font-size:16px;padding:0 52px 0 46px;outline:none;caret-color:var(--accent);transition:border-color var(--dur-med) ease, box-shadow var(--dur-med) ease;}
   #lookup::placeholder{color:#7c88a0;}
   @media (hover:hover){ #lookup:hover:not(:focus){border-color:color-mix(in srgb, var(--accent) 45%, var(--line));} }
-  #lookup:focus{border-color:var(--accent);box-shadow:0 0 0 4px rgba(72,125,169,.16);}
+  #lookup:focus{border-color:var(--accent);box-shadow:0 0 0 4px rgba(37,71,94,.16);}
   #lookup.matched{border-color:var(--accent-live, var(--accent));box-shadow:0 0 0 4px color-mix(in srgb, var(--accent-live, var(--accent)) 18%, transparent);}
   /* return-key hint surfaces once the member has typed (pure CSS via :placeholder-shown) */
   .enter-hint{position:absolute;right:14px;top:50%;transform:translateY(-50%) translateX(4px);font-family:var(--font-mono);font-size:12px;font-weight:600;color:var(--muted);background:#F1F3F8;border:1px solid var(--line);border-bottom-width:2px;border-radius:6px;padding:3px 8px;pointer-events:none;opacity:0;transition:opacity var(--dur-med) ease, transform var(--dur-med) var(--ease-out), color var(--dur-med) ease, border-color var(--dur-med) ease;}
@@ -159,7 +159,7 @@
   /* the stamp: a press sets the button down into the paper */
   .cta:active{transform:translateY(1px);box-shadow:0 1px 0 rgba(255,255,255,.08) inset,0 3px 10px rgba(10,19,34,.28);}
   /* deep-weighted gradient keeps the white label ≥4.5:1 across the button */
-  .cta.matched{color:#fff;background:linear-gradient(165deg,var(--m-light,var(--accent)) -25%, var(--m-deep,var(--accent-deep)) 65%);box-shadow:0 1px 0 rgba(255,255,255,.14) inset,0 8px 24px var(--m-glow,rgba(72,125,169,.35));}
+  .cta.matched{color:#fff;background:linear-gradient(165deg,var(--m-light,var(--accent)) -25%, var(--m-deep,var(--accent-deep)) 65%);box-shadow:0 1px 0 rgba(255,255,255,.14) inset,0 8px 24px var(--m-glow,rgba(37,71,94,.35));}
   .cta .arrow{transition:transform var(--dur-fast) ease;}
 
   .helper{text-align:center;font-size:13.5px;color:var(--muted);margin-top:16px;}
@@ -190,7 +190,7 @@
 
   /* ===== Benefit belt — the money figures at display scale, then the
      three-step ticket manifest the stub tore from ===== */
-  .belt{--ring:var(--accent-deep);background:#EEF2F7;padding:84px 0 96px;}
+  .belt{--ring:var(--accent-deep);background:#EAEFF6;padding:84px 0 96px;}
   /* the figures the program is actually about — set like denominations on a
      banknote, not buried in body text; every number restates the locked copy */
   .spec{display:grid;grid-template-columns:repeat(3,1fr);margin:0 0 76px;border-top:1px solid var(--line);border-bottom:1px solid var(--line);}
@@ -208,13 +208,13 @@
   .belt-grid::before{content:"";position:absolute;inset:6px;border:1px solid var(--line);border-radius:5px;pointer-events:none;z-index:3;}
   .belt-item{position:relative;padding:48px 40px 44px;border-left:1.5px dashed #C6CDDB;}
   .belt-item:first-child{border-left:0;}
-  .belt-item:nth-child(n+2)::before,.belt-item:nth-child(n+2)::after{content:"";position:absolute;left:-8px;width:13px;height:13px;border-radius:50%;background:#EEF2F7;border:1px solid #C6CDDB;z-index:2;}
+  .belt-item:nth-child(n+2)::before,.belt-item:nth-child(n+2)::after{content:"";position:absolute;left:-8px;width:13px;height:13px;border-radius:50%;background:#EAEFF6;border:1px solid #C6CDDB;z-index:2;}
   .belt-item:nth-child(n+2)::before{top:-8px;}
   .belt-item:nth-child(n+2)::after{bottom:-8px;}
-  .belt-item.reward{background:linear-gradient(180deg,#FFFDF9 0%,#FBF4E7 100%);border-radius:0 8px 8px 0;box-shadow:inset 0 0 0 1px rgba(217,168,103,.28);}
+  .belt-item.reward{background:linear-gradient(180deg,#FFFDF9 0%,#FDF6E8 100%);border-radius:0 8px 8px 0;box-shadow:inset 0 0 0 1px rgba(244,189,80,.28);}
   /* the numerals go to landmark scale — engraved outlines, not printed ink */
   .belt-item p.belt-num{position:absolute;top:20px;right:26px;margin:0;font-family:var(--font-display);font-style:italic;font-weight:600;font-size:100px;line-height:1;color:rgba(10,19,34,.04);-webkit-text-stroke:1.25px rgba(10,19,34,.12);pointer-events:none;user-select:none;}
-  .belt-item.reward p.belt-num{color:rgba(184,135,79,.05);-webkit-text-stroke-color:rgba(184,135,79,.32);}
+  .belt-item.reward p.belt-num{color:rgba(175,127,38,.05);-webkit-text-stroke-color:rgba(175,127,38,.32);}
   .belt-item h3{position:relative;font-weight:600;font-size:22px;letter-spacing:0;margin-bottom:10px;}
   .belt-item p{position:relative;margin:0;font-size:15px;line-height:1.7;color:var(--muted);}
   .belt-item.reward p strong{color:var(--gold-deep);font-weight:600;}
@@ -240,20 +240,20 @@
   }
 
   /* ===== Footer — the letterhead's last page, foil-edged and watermarked ===== */
-  .site-foot{position:relative;overflow:hidden;margin-top:auto;background:linear-gradient(180deg,var(--ink-2) 0%,var(--ink) 100%);color:#aab6c9;box-shadow:inset 0 1px 0 rgba(217,168,103,.26);}
-  .foot-rose{position:absolute;right:-150px;bottom:-170px;width:480px;height:480px;color:rgba(217,168,103,.09);pointer-events:none;}
+  .site-foot{position:relative;overflow:hidden;margin-top:auto;background:linear-gradient(180deg,var(--ink-2) 0%,var(--ink) 100%);color:#C2CCDC;box-shadow:inset 0 1px 0 rgba(244,189,80,.26);}
+  .foot-rose{position:absolute;right:-150px;bottom:-170px;width:480px;height:480px;color:rgba(244,189,80,.09);pointer-events:none;}
   .site-foot::before{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.03) 1px,transparent 1px);background-size:44px 44px;mask-image:linear-gradient(0deg,rgba(0,0,0,.75),transparent 80%);-webkit-mask-image:linear-gradient(0deg,rgba(0,0,0,.75),transparent 80%);pointer-events:none;}
   .foot-top{position:relative;display:flex;align-items:flex-start;justify-content:space-between;gap:56px;padding:64px 0 48px;}
   .foot-brand{max-width:560px;}
-  .foot-desc{margin:24px 0 0;font-size:15px;line-height:1.75;color:#aab6c9;}
+  .foot-desc{margin:24px 0 0;font-size:15px;line-height:1.75;color:#C2CCDC;}
   .foot-desc strong{color:#e7ecf5;font-weight:600;}
   .foot-contact{text-align:right;flex-shrink:0;}
-  .foot-lbl{display:block;font-family:var(--font-mono);font-size:12px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:#7c88a0;}
+  .foot-lbl{display:block;font-family:var(--font-mono);font-size:12px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:#ABB7CA;}
   .foot-mail{display:inline-block;margin:12px 0 8px;font-family:var(--font-mono);font-size:15.5px;font-weight:500;letter-spacing:0;color:#DBE3EF;text-decoration:none;border-bottom:1px solid rgba(154,184,208,.45);padding-bottom:3px;transition:color var(--dur-fast) ease,border-color var(--dur-fast) ease;}
   @media (hover:hover){ .foot-mail:hover{color:#fff;border-color:#fff;} }
-  .foot-hint{display:block;font-size:13.5px;color:#7c88a0;}
+  .foot-hint{display:block;font-size:13.5px;color:#ABB7CA;}
   .foot-rule{position:relative;height:1px;background:rgba(255,255,255,.09);}
-  .foot-meta{position:relative;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px 24px;padding:24px 0 32px;font-size:13.5px;color:#7c88a0;}
+  .foot-meta{position:relative;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px 24px;padding:24px 0 32px;font-size:13.5px;color:#ABB7CA;}
   .foot-tag{display:inline-flex;align-items:center;gap:9px;font-family:var(--font-mono);font-size:12px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;}
   .foot-tag .mark{width:11px;height:9.5px;color:var(--accent);flex-shrink:0;}
   @media (max-width:760px){
@@ -287,7 +287,7 @@
     .brand-plate{padding:7px 12px;}
     .brand-plate img{height:22px;}
     /* compact co-brand lockup: quiet two-line text instead of a wrapping pill */
-    .powered{background:none;border:0;padding:0;white-space:normal;max-width:124px;font-size:10.5px;letter-spacing:.08em;line-height:1.5;color:#98a5ba;justify-content:flex-end;text-align:right;}
+    .powered{background:none;border:0;padding:0;white-space:normal;max-width:124px;font-size:10.5px;letter-spacing:.08em;line-height:1.5;color:#ABB7CA;justify-content:flex-end;text-align:right;}
     .powered .dot{display:none;}
     .eyebrow{font-size:11px;margin-bottom:22px;letter-spacing:.16em;}
     .eyebrow::before{width:22px;}
@@ -301,7 +301,7 @@
     .enter-hint{display:none;}
     /* the engraving scales down, it never disappears — cropped into the
        corner at reduced weight so the headline stays clean */
-    .hero-rose{right:-130px;top:-150px;width:340px;height:340px;color:rgba(217,168,103,.11);stroke-width:.7;}
+    .hero-rose{right:-130px;top:-150px;width:340px;height:340px;color:rgba(244,189,80,.11);stroke-width:.7;}
     .hero-frame{inset:10px 10px 20px;}
     .tear{height:8px;background-size:12px 8px;}
   }
@@ -428,9 +428,9 @@
 
 <script>
   var COMPANIES = {
-    "alkeme": { name: "Alkeme", accent: "#487DA9", accentDeep: "#2E5A83", glow: "rgba(72,125,169,.4)" },
-    "acme corporation": { name: "Acme Corporation", accent: "#6E5BD1", accentDeep: "#4A3B99", glow: "rgba(110,91,209,.4)" },
-    "acme": { name: "Acme Corporation", accent: "#6E5BD1", accentDeep: "#4A3B99", glow: "rgba(110,91,209,.4)" }
+    "alkeme": { name: "Alkeme", accent: "#25475e", accentDeep: "#1A3444", glow: "rgba(37,71,94,.4)" },
+    "acme corporation": { name: "Acme Corporation", accent: "#25475e", accentDeep: "#1A3444", glow: "rgba(37,71,94,.4)" },
+    "acme": { name: "Acme Corporation", accent: "#25475e", accentDeep: "#1A3444", glow: "rgba(37,71,94,.4)" }
   };
   var input = document.getElementById('lookup');
   var cta = document.getElementById('ctaBtn');

@@ -10,12 +10,12 @@
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,600..700;1,9..144,600&family=Libre+Franklin:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet" />
 <style>
   :root{
-    --ink:#0B1322; --ink-2:#0F1B30; --ink-3:#16243D; --sidebar:#0E192A; --sidebar-active:#16243D;
-    --bg:#E9EDF2; --panel:#ffffff; --paper:#FDFCF9;
+    --ink:#25475e; --ink-2:#203E52; --ink-3:#1C3647; --sidebar:#25475e; --sidebar-active:#25475e;
+    --bg:#EAEFF6; --panel:#ffffff; --paper:#FDFCF9;
     --text:#0A121F; --muted:#50617B; --faint:#8D99AD; --line:#DDE3EE;
-    --navy:#001F43;
-    --gold:#D9A867; --gold-bright:#E8C48C; --gold-deep:#B8874F;
-    --accent:#6E5BD1; --accent-deep:#4A3B99; --accent-tint: rgba(110,91,209,.10);
+    --navy:#25475e;
+    --gold:#F4BD50; --gold-bright:#F8D384; --gold-deep:#AF7F26;
+    --accent:#25475e; --accent-deep:#1A3444; --accent-tint: rgba(37,71,94,.10);
     --radius-lg:20px; --radius-md:12px; --radius-sm:8px;
     --shadow-sm:0 1px 2px rgba(10,19,34,.05), 0 2px 8px rgba(10,19,34,.05);
     --shadow-md:0 10px 26px -6px rgba(10,19,34,.16), 0 4px 10px rgba(10,19,34,.06);
@@ -27,7 +27,7 @@
     --font-ui:'Libre Franklin', system-ui, sans-serif;
     --font-mono:'IBM Plex Mono', ui-monospace, monospace;
     /* gold for small text on paper — deep enough to hold 4.5:1 */
-    --gold-ink:#8A6437;
+    --gold-ink:#866317;
     /* barely-there paper grain — documents only, never environments */
     --grain:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)' opacity='.04'/%3E%3C/svg%3E");
     /* type scale — one set of sizes, referenced everywhere */
@@ -48,7 +48,7 @@
      surfaces, rounded only where the element itself is */
   :focus-visible{outline:2px solid var(--ring,var(--accent-deep));outline-offset:2px;}
   /* light steel ring on ink surfaces, deep accent on light ones */
-  .arrive,section.sec--dark,.sidebar,footer.site{--ring:color-mix(in srgb, var(--accent) 55%, #fff);}
+  .arrive,section.sec--dark,.sidebar,footer.site{--ring:color-mix(in srgb, var(--accent) 40%, #fff);}
   a{color:inherit;}
 
   /* ===== Scroll progress ===== */
@@ -80,7 +80,7 @@
   .wayfinder a{flex-shrink:0;display:inline-flex;align-items:center;gap:9px;font-family:var(--font-mono);font-size:12px;font-weight:600;color:var(--muted);text-decoration:none;padding:0 16px;min-height:46px;border-bottom:2px solid transparent;transition:color var(--dur-fast) ease, background-color var(--dur-fast) ease, border-color var(--dur-fast) ease;}
   .wayfinder a + a{border-left:1px solid var(--line);}
   .wayfinder a.on{color:var(--accent-deep);border-bottom-color:var(--accent);background:linear-gradient(0deg, color-mix(in srgb, var(--accent) 10%, transparent), transparent 80%);}
-  .wayfinder a:last-child.on{color:var(--gold-ink);border-bottom-color:var(--gold);background:linear-gradient(0deg, rgba(217,168,103,.12), transparent 80%);}
+  .wayfinder a:last-child.on{color:var(--gold-ink);border-bottom-color:var(--gold);background:linear-gradient(0deg, rgba(244,189,80,.12), transparent 80%);}
   .wayfinder .wf-ix{font-family:'Fraunces',Georgia,serif;font-style:italic;font-weight:600;font-size:14px;line-height:1;color:var(--faint);transition:color var(--dur-fast) ease;}
   .wayfinder a.on .wf-ix{color:var(--accent-deep);}
   .wayfinder a:last-child .wf-ix{color:var(--gold-deep);}
@@ -90,27 +90,27 @@
   /* ===== Sidebar — a ledger rail, not an app nav: ruled rows, Fraunces
      indices leading each entry, the accent as a sliding left-rule marker ===== */
   .sidebar{position:sticky;top:65px;width:264px;flex-shrink:0;height:calc(100vh - 65px);background:var(--sidebar);color:#e7ecf5;padding:28px 22px;display:flex;flex-direction:column;overflow-y:auto;}
-  .sb-label{font-family:var(--font-mono);font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:#5d6b82;padding:0 2px;margin:0 0 10px;}
+  .sb-label{font-family:var(--font-mono);font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:#ABB7CA;padding:0 2px;margin:0 0 10px;}
   .sb-nav{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:0;position:relative;border-top:1px solid rgba(255,255,255,.08);}
   .sb-item{position:relative;border-bottom:1px solid rgba(255,255,255,.08);}
-  .sb-link{display:flex;align-items:baseline;gap:14px;padding:14px 10px 14px 12px;color:#93a3ba;text-decoration:none;font-size:14px;font-weight:500;position:relative;z-index:1;transition:color var(--dur-fast) ease, transform var(--dur-med) var(--ease-out);}
+  .sb-link{display:flex;align-items:baseline;gap:14px;padding:14px 10px 14px 12px;color:#B3BFD1;text-decoration:none;font-size:14px;font-weight:500;position:relative;z-index:1;transition:color var(--dur-fast) ease, transform var(--dur-med) var(--ease-out);}
   @media (hover:hover){ .sb-item:not(.active) .sb-link:hover{color:#cfd9e8;transform:translateX(2px);} }
   .sb-item.active .sb-link{color:#fff;font-weight:600;}
   /* the journey numerals lead each row — document indices, not app icons */
-  .sb-ix{font-family:var(--font-display);font-style:italic;font-weight:600;font-size:16px;line-height:1;color:#5d6b82;width:26px;flex-shrink:0;transition:color var(--dur-fast) ease;}
-  .sb-item.active .sb-ix{color:color-mix(in srgb, var(--accent) 60%, #fff);}
-  .sb-item:last-child .sb-ix{color:rgba(217,168,103,.55);}
+  .sb-ix{font-family:var(--font-display);font-style:italic;font-weight:600;font-size:16px;line-height:1;color:#8FA0B6;width:26px;flex-shrink:0;transition:color var(--dur-fast) ease;}
+  .sb-item.active .sb-ix{color:color-mix(in srgb, var(--accent) 40%, #fff);}
+  .sb-item:last-child .sb-ix{color:rgba(244,189,80,.7);}
   .sb-item:last-child.active .sb-ix{color:var(--gold-bright);}
-  .sb-highlight{position:absolute;left:0;right:0;height:49px;background:linear-gradient(90deg, color-mix(in srgb, var(--accent) 16%, transparent), transparent 75%);border-left:2px solid var(--accent);z-index:0;transition:transform var(--dur-slow) var(--ease-out);}
+  .sb-highlight{position:absolute;left:0;right:0;height:49px;background:linear-gradient(90deg, rgba(255,255,255,.10), transparent 75%);border-left:2px solid color-mix(in srgb, var(--accent) 40%, #fff);z-index:0;transition:transform var(--dur-slow) var(--ease-out);}
   /* the marker turns gold when the reader reaches the money chapter */
-  .sb-nav:has(.sb-item:last-child.active) .sb-highlight{border-left-color:var(--gold);background:linear-gradient(90deg, rgba(217,168,103,.14), transparent 75%);}
+  .sb-nav:has(.sb-item:last-child.active) .sb-highlight{border-left-color:var(--gold);background:linear-gradient(90deg, rgba(244,189,80,.14), transparent 75%);}
   .sb-link:focus-visible{outline-offset:-2px;}
   @media (prefers-reduced-motion:reduce){
     .sb-highlight{transition:none;}
     .wayfinder{scroll-behavior:auto;}
   }
-  .sb-foot{margin-top:auto;padding:16px 12px 4px;border-top:1px solid rgba(255,255,255,.08);font-size:12.5px;color:#7c88a0;line-height:1.6;}
-  .sb-foot a{color:#aab6c9;text-decoration:none;font-weight:600;}
+  .sb-foot{margin-top:auto;padding:16px 12px 4px;border-top:1px solid rgba(255,255,255,.08);font-size:12.5px;color:#ABB7CA;line-height:1.6;}
+  .sb-foot a{color:#C2CCDC;text-decoration:none;font-weight:600;}
 
   .content{flex:1;min-width:0;padding:28px 36px 0;}
   .content-inner{max-width:none;}
@@ -135,10 +135,10 @@
   .fold span{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);background:var(--paper);padding:0 14px;font-family:var(--font-mono);font-size:10px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--faint);white-space:nowrap;}
   /* the last page tears off toward the ink finale — where the money is */
   .run-tear{height:11px;margin-top:-1px;background-image:linear-gradient(135deg,var(--paper) 50%,transparent 50%),linear-gradient(-135deg,var(--paper) 50%,transparent 50%);background-size:16px 11px;background-repeat:repeat-x;filter:drop-shadow(0 3px 2px rgba(10,19,34,.12));}
-  section.sec--dark{overflow:hidden;border-radius:20px;background:linear-gradient(165deg,var(--ink) 0%,var(--ink-2) 55%,var(--ink-3) 100%);--tc:#fff;--mc:#a9bad2;--hair:rgba(255,255,255,.13);--flow-tile:rgba(255,255,255,.07);box-shadow:var(--shadow-lift);}
+  section.sec--dark{overflow:hidden;border-radius:20px;background:linear-gradient(165deg,var(--ink) 0%,var(--ink-2) 55%,var(--ink-3) 100%);--tc:#fff;--mc:#C2CCDC;--hair:rgba(255,255,255,.13);--flow-tile:rgba(255,255,255,.07);box-shadow:var(--shadow-lift);}
   .sec--dark::before{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.03) 1px,transparent 1px);background-size:44px 44px;mask-image:linear-gradient(180deg,rgba(0,0,0,.8),transparent 85%);-webkit-mask-image:linear-gradient(180deg,rgba(0,0,0,.8),transparent 85%);pointer-events:none;}
   /* the money finale earns its hairline gold crest — a printed rule, not a glow */
-  section.sec--finale{box-shadow:inset 0 1px 0 rgba(217,168,103,.4), var(--shadow-lift);margin-bottom:32px;}
+  section.sec--finale{box-shadow:inset 0 1px 0 rgba(244,189,80,.4), var(--shadow-lift);margin-bottom:32px;}
   .sec > *{position:relative;z-index:1;}
 
   /* ===== Engraved devices — the issued-instrument layer =====
@@ -149,8 +149,8 @@
   /* right offset = sprocket rail (26px) + margin rule + true breathing room,
      with allowance for the italic ink that overhangs the layout box */
   .sec-num{position:absolute;z-index:0;top:22px;right:52px;margin:0;font-family:var(--font-display);font-style:italic;font-weight:600;font-size:clamp(110px,15vw,190px);line-height:.85;color:rgba(10,19,34,.03);-webkit-text-stroke:1.5px rgba(10,19,34,.09);pointer-events:none;user-select:none;}
-  .sec--dark .sec-num{color:rgba(217,168,103,.03);-webkit-text-stroke-color:rgba(217,168,103,.20);}
-  .fin-rose{position:absolute;z-index:0;top:34%;right:-140px;width:460px;height:460px;color:rgba(217,168,103,.10);pointer-events:none;}
+  .sec--dark .sec-num{color:rgba(244,189,80,.03);-webkit-text-stroke-color:rgba(244,189,80,.20);}
+  .fin-rose{position:absolute;z-index:0;top:34%;right:-140px;width:460px;height:460px;color:rgba(244,189,80,.10);pointer-events:none;}
   .seal{position:relative;}
   .seal .rose{position:absolute;inset:0;width:100%;height:100%;}
   .seal .seal-mark{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);}
@@ -178,10 +178,10 @@
   /* the tenant name is the one blank on the form — filled in, ruled, and
      captioned "employer": the member typed it into that blank one click ago.
      The accent is its highlighter as well as its rule. */
-  .tname{position:relative;display:inline-block;font-family:'Fraunces',Georgia,serif;font-style:italic;font-weight:600;letter-spacing:-.01em;padding:0 .1em .02em;color:#fff;border-bottom:2.5px solid color-mix(in srgb, var(--accent) 62%, #fff);background:linear-gradient(180deg,transparent 68%,color-mix(in srgb, var(--accent) 24%, transparent) 68%);}
+  .tname{position:relative;display:inline-block;font-family:'Fraunces',Georgia,serif;font-style:italic;font-weight:600;letter-spacing:-.01em;padding:0 .1em .02em;color:#fff;border-bottom:2.5px solid color-mix(in srgb, var(--accent) 45%, #fff);background:linear-gradient(180deg,transparent 68%,rgba(255,255,255,.16) 68%);}
   /* decorative caption under the blank — a real element with aria-hidden,
      so every browser both shows it and keeps it out of the a11y tree */
-  .tname .tcap{position:absolute;left:50%;top:calc(100% + 5px);transform:translateX(-50%);font-family:var(--font-mono);font-style:normal;font-weight:600;font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:color-mix(in srgb, var(--accent) 45%, #93a1b8);white-space:nowrap;}
+  .tname .tcap{position:absolute;left:50%;top:calc(100% + 5px);transform:translateX(-50%);font-family:var(--font-mono);font-style:normal;font-weight:600;font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:color-mix(in srgb, var(--accent) 20%, #aab6c9);white-space:nowrap;}
   /* trust items as the ticket's fine-print manifest — same rule as the landing */
   .a-chips{display:flex;flex-wrap:wrap;align-items:center;gap:10px 22px;padding:15px 2px;border-top:1px solid rgba(255,255,255,.14);border-bottom:1px solid rgba(255,255,255,.14);max-width:640px;}
   .a-chip{display:flex;align-items:center;gap:8px;font-family:var(--font-mono);font-size:11px;font-weight:600;letter-spacing:.07em;text-transform:uppercase;color:#b9c4d6;}
@@ -198,30 +198,30 @@
 
   .eyebrow{display:inline-flex;align-items:center;gap:8px;font-family:var(--font-mono);font-size:var(--t-label);font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--accent-deep);margin:0 0 14px;}
   .eyebrow .mark{width:12px;height:10.5px;flex-shrink:0;}
-  .sec--dark .eyebrow,.arrive .eyebrow{color:color-mix(in srgb, var(--accent) 52%, #fff);}
+  .sec--dark .eyebrow,.arrive .eyebrow{color:color-mix(in srgb, var(--accent) 32%, #fff);}
   /* journey index — the Fraunces numeral thread that strings the five sections
      into one story; 05 wears gold because it labels the getting-paid step */
   .jix{font-family:'Fraunces',Georgia,serif;font-style:italic;font-weight:600;font-size:17px;line-height:1;letter-spacing:.02em;text-transform:none;color:var(--accent-deep);padding-right:12px;margin-right:4px;border-right:1px solid color-mix(in srgb, var(--accent) 30%, var(--hair,var(--line)));}
   .sec--dark .jix{color:color-mix(in srgb, var(--accent) 45%, #fff);border-right-color:rgba(255,255,255,.22);}
-  .sec--finale .jix{color:var(--gold-bright);border-right-color:rgba(217,168,103,.4);}
+  .sec--finale .jix{color:var(--gold-bright);border-right-color:rgba(244,189,80,.4);}
   .sec--finale .eyebrow{color:var(--gold-bright);}
   h2.sec-title{font-weight:600;font-size:var(--t-title);letter-spacing:-.015em;line-height:1.12;margin-bottom:14px;color:var(--tc,var(--text));}
   p.sec-sub{color:var(--mc,var(--muted));font-size:var(--t-sub);max-width:640px;margin:0 0 48px;}
   .h3-sub{font-weight:600;font-size:var(--t-h3);margin:46px 0 10px;color:var(--tc,var(--text));}
   .h3-sub--rule{margin-top:56px;padding-top:40px;border-top:1px solid var(--hair,var(--line));}
-  .sec--finale .h3-sub--rule{border-top-color:rgba(217,168,103,.26);}
+  .sec--finale .h3-sub--rule{border-top-color:rgba(244,189,80,.26);}
   .p-sub{color:var(--mc,var(--muted));font-size:var(--t-body);margin:0 0 6px;max-width:640px;}
 
   /* dark-canvas rethemes for components that live in the finale */
   .sec--dark .flow-num{border-color:rgba(255,255,255,.22);color:color-mix(in srgb, var(--accent) 38%, #fff);box-shadow:0 1px 0 rgba(255,255,255,.12) inset,0 8px 20px rgba(0,0,0,.35);}
-  .sec--dark .flow-step.now .flow-num{border-color:color-mix(in srgb, var(--accent) 68%, #fff);box-shadow:0 0 0 4px color-mix(in srgb, var(--accent) 24%, transparent),0 10px 24px rgba(0,0,0,.45);}
-  .sec--dark .flow-step.gold .flow-num{background:rgba(217,168,103,.12);border-color:rgba(217,168,103,.45);color:var(--gold-bright);}
-  .sec--dark .flow-step.gold.now .flow-num{border-color:var(--gold);box-shadow:0 0 0 4px rgba(217,168,103,.16),0 10px 24px rgba(0,0,0,.45);}
+  .sec--dark .flow-step.now .flow-num{border-color:color-mix(in srgb, var(--accent) 45%, #fff);box-shadow:0 0 0 4px color-mix(in srgb, var(--accent) 24%, transparent),0 10px 24px rgba(0,0,0,.45);}
+  .sec--dark .flow-step.gold .flow-num{background:rgba(244,189,80,.12);border-color:rgba(244,189,80,.45);color:var(--gold-bright);}
+  .sec--dark .flow-step.gold.now .flow-num{border-color:var(--gold);box-shadow:0 0 0 4px rgba(244,189,80,.16),0 10px 24px rgba(0,0,0,.45);}
   .sec--dark .pay-card h4{color:#fff;}
-  .sec--dark .pay-card p{color:#b9c6da;}
+  .sec--dark .pay-card p{color:#C2CCDC;}
   .sec--dark .faq-q{color:#fff;}
   .sec--dark .faq-q svg{stroke:color-mix(in srgb, var(--accent) 50%, #fff);}
-  .sec--dark .faq-a-inner{color:#b9c6da;}
+  .sec--dark .faq-a-inner{color:#C2CCDC;}
 
   /* ===== Step flow — the one spine every numbered sequence rides =====
      Fraunces italic numerals stay the site's typographic signature, but scaled
@@ -239,8 +239,8 @@
   .flow-num{position:relative;z-index:1;width:52px;height:52px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-family:'Fraunces',Georgia,serif;font-style:italic;font-weight:600;font-size:21px;line-height:1;color:var(--accent-deep);font-variant-numeric:tabular-nums;background:var(--flow-tile,#fff);border:1px solid color-mix(in srgb,var(--accent) 35%,var(--line));box-shadow:0 1px 0 rgba(255,255,255,.85) inset,var(--shadow-sm);transition:border-color 220ms ease,box-shadow 220ms ease;}
   .flow-step.now .flow-num{border-color:var(--accent);box-shadow:0 0 0 4px var(--accent-tint),0 10px 22px -6px color-mix(in srgb,var(--accent) 38%,transparent);}
   /* gold tiles: reserved for the steps where money reaches the member */
-  .flow-step.gold .flow-num{color:var(--gold-deep);background:linear-gradient(160deg,#fff 0%,#FBF3E6 100%);border-color:rgba(184,135,79,.5);}
-  .flow-step.gold.now .flow-num{border-color:var(--gold);box-shadow:0 0 0 4px rgba(217,168,103,.18),0 10px 22px -6px rgba(184,135,79,.45);}
+  .flow-step.gold .flow-num{color:var(--gold-deep);background:linear-gradient(160deg,#fff 0%,#FDF7EA 100%);border-color:rgba(175,127,38,.5);}
+  .flow-step.gold.now .flow-num{border-color:var(--gold);box-shadow:0 0 0 4px rgba(244,189,80,.18),0 10px 22px -6px rgba(175,127,38,.45);}
   .flow-body{padding-top:14px;}
   .flow-body h3{font-weight:600;font-size:20px;letter-spacing:0;margin:0 0 8px;color:var(--tc,var(--text));}
   .flow-body p{margin:0;color:var(--mc,var(--muted));font-size:15px;line-height:1.7;max-width:62ch;}
@@ -275,7 +275,7 @@
      scale Fraunces figures, gold lathework seal breaking the top edge. */
   .paystub{position:relative;background:#fff;background-image:var(--grain);border:1.5px solid color-mix(in srgb, var(--gold) 50%, var(--line));border-radius:6px;box-shadow:var(--shadow-md);padding:26px 30px 22px;margin-top:52px;max-width:760px;font-family:var(--font-mono);font-variant-numeric:tabular-nums;}
   .paystub::before{content:"";position:absolute;inset:5px;border:1px solid color-mix(in srgb, var(--gold) 32%, var(--line));border-radius:3px;pointer-events:none;}
-  .ps-seal{position:absolute;top:-26px;right:24px;width:86px;height:86px;rotate:8deg;color:var(--gold-deep);opacity:.92;filter:drop-shadow(0 6px 14px rgba(184,135,79,.30));}
+  .ps-seal{position:absolute;top:-26px;right:24px;width:86px;height:86px;rotate:8deg;color:var(--gold-deep);opacity:.92;filter:drop-shadow(0 6px 14px rgba(175,127,38,.30));}
   .ps-seal .rose{stroke-width:1.7;}
   .ps-seal .seal-mark{font-family:var(--font-display);font-style:italic;font-weight:600;font-size:19px;line-height:1;}
   .ps-head{display:flex;align-items:center;gap:8px;font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);padding-bottom:12px;border-bottom:1px solid var(--line);}
@@ -288,7 +288,7 @@
   .ps-note{font-size:11px;letter-spacing:.04em;text-transform:uppercase;color:var(--muted);}
   .ps-row.gold .ps-lbl,.ps-row.gold .ps-note{color:var(--gold-ink);}
   .ps-row.gold .ps-val{color:var(--gold-deep);}
-  .ps-row.gold .ps-dots{border-bottom-color:rgba(184,135,79,.45);}
+  .ps-row.gold .ps-dots{border-bottom-color:rgba(175,127,38,.45);}
   .ps-foot{font-family:var(--font-ui);font-size:13px;color:var(--muted);line-height:1.65;padding-top:14px;}
   @media (max-width:560px){
     .paystub{padding:20px 18px 16px;}
@@ -447,23 +447,23 @@
 
   /* ===== Claim ticket — the landing stub's grammar at the moment of highest
      intent: a perforated ticket you take to the counter. Tears when pulled. */
-  .ticket{position:relative;display:inline-flex;align-items:stretch;margin-top:26px;background:#fff;background-image:var(--grain);border:1.5px solid var(--gold);text-decoration:none;color:var(--text);border-radius:8px;rotate:-.6deg;filter:drop-shadow(0 3px 6px rgba(139,101,55,.22));transition:rotate var(--dur-med) var(--ease-out), translate var(--dur-med) var(--ease-out), filter var(--dur-med) ease, border-color var(--dur-fast) ease;
+  .ticket{position:relative;display:inline-flex;align-items:stretch;margin-top:26px;background:#fff;background-image:var(--grain);border:1.5px solid var(--gold);text-decoration:none;color:var(--text);border-radius:8px;rotate:-.6deg;filter:drop-shadow(0 3px 6px rgba(134,99,23,.22));transition:rotate var(--dur-med) var(--ease-out), translate var(--dur-med) var(--ease-out), filter var(--dur-med) ease, border-color var(--dur-fast) ease;
     mask-image:radial-gradient(circle at 122px 0, transparent 5px, #000 6px),radial-gradient(circle at 122px 100%, transparent 5px, #000 6px);
     -webkit-mask-image:radial-gradient(circle at 122px 0, transparent 5px, #000 6px),radial-gradient(circle at 122px 100%, transparent 5px, #000 6px);
     mask-composite:intersect;-webkit-mask-composite:source-in;}
   /* the ticket wears gold — the edge, perforation, and arrow are the money
      inks; only the issuer's wordmark on its chip stays neutral, identical
      across tenants */
-  .tk-stub{display:flex;align-items:center;justify-content:center;width:122px;border-right:1.5px dashed rgba(184,135,79,.55);background:#FBF6EC;border-radius:6px 0 0 6px;}
+  .tk-stub{display:flex;align-items:center;justify-content:center;width:122px;border-right:1.5px dashed rgba(175,127,38,.55);background:#FEF8ED;border-radius:6px 0 0 6px;}
   .tk-stub img{height:14px;width:auto;display:block;}
   .tk-body{display:flex;align-items:center;gap:10px;padding:16px 24px;font-family:var(--font-ui);font-size:15.5px;font-weight:700;}
   .tk-body .arrow{color:var(--gold-deep);transition:transform var(--dur-fast) ease;}
   @media (hover:hover){
-    .ticket:hover{rotate:0deg;translate:0 -2px;border-color:var(--gold-deep);filter:drop-shadow(0 10px 18px rgba(184,135,79,.4));}
+    .ticket:hover{rotate:0deg;translate:0 -2px;border-color:var(--gold-deep);filter:drop-shadow(0 10px 18px rgba(175,127,38,.4));}
     .ticket:hover .arrow{transform:translateX(3px);}
   }
-  .ticket:focus-visible{rotate:0deg;border-color:var(--gold-deep);filter:drop-shadow(0 10px 18px rgba(184,135,79,.4));}
-  .ticket:active{translate:0 1px;filter:drop-shadow(0 1px 3px rgba(139,101,55,.28));}
+  .ticket:focus-visible{rotate:0deg;border-color:var(--gold-deep);filter:drop-shadow(0 10px 18px rgba(175,127,38,.4));}
+  .ticket:active{translate:0 1px;filter:drop-shadow(0 1px 3px rgba(134,99,23,.28));}
   @media (prefers-reduced-motion:no-preference){
     .ticket.tearing{animation:tk-tear 460ms var(--ease-out);}
     @keyframes tk-tear{30%{translate:10px -12px;rotate:2deg;}100%{translate:0 0;rotate:-.6deg;}}
@@ -515,7 +515,7 @@
   .faq-item{counter-increment:faq;background:none;border:0;border-bottom:1px solid var(--hair,var(--line));border-radius:0;box-shadow:none;overflow:hidden;transition:border-color var(--dur-med) ease;}
   .faq-item.open{border-bottom-color:color-mix(in srgb, var(--accent) 45%, transparent);}
   .faq-q{width:100%;display:flex;align-items:center;justify-content:flex-start;gap:0;padding:18px 2px;background:none;border:0;text-align:left;font-family:var(--font-ui);font-size:15.5px;font-weight:600;color:var(--text);cursor:pointer;transition:background-color var(--dur-fast) ease;}
-  .faq-q::before{content:counter(faq) ".";font-family:var(--font-display);font-style:italic;font-weight:600;font-size:17px;line-height:1;color:color-mix(in srgb, var(--accent) 55%, #fff);width:34px;flex-shrink:0;}
+  .faq-q::before{content:counter(faq) ".";font-family:var(--font-display);font-style:italic;font-weight:600;font-size:17px;line-height:1;color:color-mix(in srgb, var(--accent) 38%, #fff);width:34px;flex-shrink:0;}
   @media (hover:hover){ .faq-item:not(.open) .faq-q:hover{background:color-mix(in srgb, var(--accent) 5%, transparent);} }
   .faq-q:active{background:color-mix(in srgb, var(--accent) 9%, transparent);}
   .faq-q:focus-visible{outline-offset:-2px;}
@@ -536,23 +536,23 @@
 
   /* ===== Footer — dark brand anchor with the instrument's foil edge and
      a lathework watermark, same construction as the landing page ===== */
-  footer.site{position:relative;overflow:hidden;background:linear-gradient(180deg,var(--ink-2) 0%,var(--ink) 100%);color:#aab6c9;box-shadow:inset 0 1px 0 rgba(217,168,103,.26);}
-  .foot-rose{position:absolute;right:-150px;bottom:-170px;width:480px;height:480px;color:rgba(217,168,103,.09);pointer-events:none;}
+  footer.site{position:relative;overflow:hidden;background:linear-gradient(180deg,var(--ink-2) 0%,var(--ink) 100%);color:#C2CCDC;box-shadow:inset 0 1px 0 rgba(244,189,80,.26);}
+  .foot-rose{position:absolute;right:-150px;bottom:-170px;width:480px;height:480px;color:rgba(244,189,80,.09);pointer-events:none;}
   footer.site::before{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.03) 1px,transparent 1px);background-size:44px 44px;mask-image:linear-gradient(0deg,rgba(0,0,0,.75),transparent 80%);-webkit-mask-image:linear-gradient(0deg,rgba(0,0,0,.75),transparent 80%);pointer-events:none;}
   .foot-inner{position:relative;max-width:1440px;margin:0 auto;padding:0 32px;}
-  .brand-plate{display:inline-flex;align-items:center;background:linear-gradient(180deg,#fefdfb,#f4efe5);border:1px solid rgba(217,168,103,.55);border-radius:12px;padding:9px 18px;box-shadow:0 1px 0 rgba(255,255,255,.9) inset,0 4px 14px rgba(0,0,0,.4);}
+  .brand-plate{display:inline-flex;align-items:center;background:linear-gradient(180deg,#fefdfb,#FCF3E1);border:1px solid rgba(244,189,80,.55);border-radius:12px;padding:9px 18px;box-shadow:0 1px 0 rgba(255,255,255,.9) inset,0 4px 14px rgba(0,0,0,.4);}
   .brand-plate img{height:26px;width:auto;display:block;}
   .foot-top{display:flex;align-items:flex-start;justify-content:space-between;gap:56px;padding:64px 0 48px;}
   .foot-brand{max-width:560px;}
-  .foot-desc{margin:24px 0 0;font-size:15px;line-height:1.75;color:#aab6c9;}
+  .foot-desc{margin:24px 0 0;font-size:15px;line-height:1.75;color:#C2CCDC;}
   .foot-desc strong{color:#e7ecf5;font-weight:600;}
   .foot-contact{text-align:right;flex-shrink:0;}
-  .foot-lbl{display:block;font-family:var(--font-mono);font-size:12px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:#7c88a0;}
+  .foot-lbl{display:block;font-family:var(--font-mono);font-size:12px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:#ABB7CA;}
   .foot-mail{display:inline-block;margin:12px 0 8px;font-family:var(--font-mono);font-size:15.5px;font-weight:500;letter-spacing:0;color:#DBE3EF;text-decoration:none;border-bottom:1px solid rgba(154,184,208,.45);padding-bottom:3px;transition:color var(--dur-fast) ease,border-color var(--dur-fast) ease;}
   @media (hover:hover){ .foot-mail:hover{color:#fff;border-color:#fff;} }
-  .foot-hint{display:block;font-size:13.5px;color:#7c88a0;}
+  .foot-hint{display:block;font-size:13.5px;color:#ABB7CA;}
   .foot-rule{height:1px;background:rgba(255,255,255,.09);}
-  .foot-meta{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px 24px;padding:24px 0 32px;font-size:13.5px;color:#7c88a0;}
+  .foot-meta{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px 24px;padding:24px 0 32px;font-size:13.5px;color:#ABB7CA;}
   .foot-tag{display:inline-flex;align-items:center;gap:9px;font-family:var(--font-mono);font-size:12px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;}
   .foot-tag .mark{width:11px;height:9.5px;color:var(--accent);flex-shrink:0;}
   @media (max-width:760px){
